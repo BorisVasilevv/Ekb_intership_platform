@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'users',
+    'intership',
+    'main',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -66,6 +69,8 @@ TEMPLATES = [
         },
     },
 ]
+
+# TEMPLATE_DIRS = (BASE_DIR / 'main/templates',)
 
 WSGI_APPLICATION = 'intership_platform.wsgi.application'
 
