@@ -27,6 +27,9 @@
             {%render_field f class+="input-field"%} <!-- don't know another way-->
             {{f.errors}}
         {% endfor %}
+        {% for i in roles %}
+            {{i}}
+        {% endfor %}
         <button class="submit-button" type="submit">Подтвердить</button>
     </form>
 
