@@ -3,26 +3,25 @@
 {% load widget_tweaks %}
 
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/registration.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/creation.css' %}">
 {% endblock %}
 
 {% block title %}Создание стажировки{% endblock %}
 
 {% block content %}
-<main class="registration-container">
-    <div class="registration-header">
-        <span class="registration-header_main">Создание стажировки</span>
+<main class="creation-container">
+    <div class="creation-header">
+        <span class="creation-header_main">Создание стажировки</span>
     </div>
 
-    <form method="post" class="registration-form">
+    <form method="post" class="creation-form">
         {% csrf_token %}
 
         {% for field in form %}
-            {% if field.name != 'role' %}
-                <!-- Удалил field.label_tag, т.к. render_field уже выводит и поле, и метку -->
-                {% render_field field class+="input-field" %}
-                {{ field.errors }}
-            {% endif %}
+            <!-- Удалил field.label_tag, т.к. render_field уже выводит и поле, и метку -->
+            {{ field|add_label_class:"creation-help-info" }}
+            {% render_field field class+="input-field" %}
+            {{ field.errors }}
         {% endfor %}
 
         <button class="submit-button" type="submit">Подтвердить</button>
