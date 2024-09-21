@@ -4,7 +4,6 @@
 {% block head %}
 <link rel="shortcut icon" href="{% static 'main/icons/home.svg'%}" />
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-<link rel="stylesheet" href="{% static 'main/news_slider.css' %}" />
 <script src="https://api-maps.yandex.ru/2.1/?apikey=d5ab5e3a-1ac2-4343-a58f-b97c6da034b9&lang=ru_RU" type="text/javascript"></script>
 {% endblock %}
 {%block title%}Главная страница{%endblock%}
@@ -28,14 +27,14 @@
         <span class="section-subtitle">Здесь вы увидите последние новости сайта!</span>
         <div class="swiper-container">
             <div class="swiper-wrapper">
-{#                {% for news in latest_news %}#}
-{#                <div class="swiper-slide">#}
-{#                    <a href="{{ news.url }}">#}
-{#                        <img src="{{ news.image.url }}" alt="{{ news.title }}">#}
-{#                        <h3>{{ news.title }}</h3>#}
-{#                    </a>#}
-{#                </div>#}
-{#                {% endfor %}#}
+                {% for news in latest_news %}
+                <div class="swiper-slide">
+                    <a href="{{ news.url }}">
+                        <img class="news_img" src="{{ news.image.url }}" alt="{{ news.title }}">
+                        <h3>{{ news.title }}</h3>
+                    </a>
+                </div>
+                {% endfor %}
             </div>
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
