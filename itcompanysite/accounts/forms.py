@@ -40,6 +40,7 @@ class EducationCreationForm(UserCreationForm):
         label=_("Местоположение"),
         max_length=255,
         widget=forms.TextInput(attrs={"autocomplete": "location"}),
+        required=False,
     )
     company_name = forms.CharField(
         label=_("Название образовательного учреждения"),
@@ -64,6 +65,7 @@ class CompanyCreationForm(UserCreationForm):
         label=_("Местоположение"),
         max_length=255,
         widget=forms.TextInput(attrs={"autocomplete": "location"}),
+        required=False,
     )
     company_name = forms.CharField(
         label=_("Название компании"),
@@ -95,3 +97,4 @@ class MyAuthenticationForm(AuthenticationForm):
             else:
                 self.confirm_login_allowed(self.user_cache)
         return self.cleaned_data
+

@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
 from . import views
 from django.urls import path, include
-from .views import EmailView, MyLoginView
+from .views import EmailView, MyLoginView, upload_document
 
 urlpatterns = [
     path("login/", MyLoginView.as_view(), name="login"),
@@ -12,6 +12,7 @@ urlpatterns = [
     path('registration/company', views.registration, name='company_reg'),
     path('registration/ed_institution', views.registration, name='ed_institution'),
     path('profile/', views.profile, name='profile'),
+    path('profile/upload/', upload_document, name='upload_document'),
 
     path(
         'i/',

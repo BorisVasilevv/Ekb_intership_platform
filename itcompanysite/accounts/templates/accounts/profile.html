@@ -37,14 +37,23 @@
     <div class="profile_info"></div>
 
     <div class="profile_section documents">
-        <span class="section_title">Документы практики</span>
+        <span class="section_title">Документы</span>
         <div class="section_items documents_items"></div>
-        <button class="add-item add-document">
-            <span>+ Добавить документ практики</span>
+        <button class="add-item add-document" id="addDocumentButton">
+            <span>+ Добавить документ</span>
         </button>
+        <input type="file" id="fileInput" style="display: none;" /> <!-- Скрытое поле для загрузки -->
+
+        <div class="profile_documents">
+            {% for file in files%}
+                <span> {{ file.document_name }} </span>
+            {%endfor%}
+        </div>
+
     </div>
 
-    <div class="profile_documents"></div>
+
+
 
     <div class="profile-header__rect"></div>
 
@@ -53,7 +62,7 @@
         <div class="companies favourite-companies">
 
             {% if not companies %}
-                <h4>Здесь пока нет компаний</h4>
+                <h4>Здесь пока нет избранного</h4>
             {% endif %}
 
             {% for company in companies %}
@@ -78,13 +87,7 @@
 
                         <div class="companies-item_description">
                             <span class="companies-item_about-company">{{company.short_description}}</span>
-
-                            <div class="accreditation">
-                                <img class="accreditation__icon" src="{% static 'companies/icons/check.svg'%}">
-                                <span class="accreditation__text">Аккредитация</span>
-                            </div>
                         </div>
-
                     </div>
 
                     <div class="contacts-container">
@@ -92,14 +95,6 @@
                         <span class="contacts-title">Способы связи с компанией для стажировки:</span>
 
                         <div class="contacts-content">
-
-                            {% if company.telegram is not none%}
-                            <div class="contact-item">
-                                <img class="contact-item__icon" src="{% static 'companies/icons/telegram.svg'%}">
-                                <span class="contact-item__link">{{company.telegram}}</span>
-                            </div>
-                            {% endif %}
-
                             {% if company.phone is not none%}
                                 <div class="contact-item">
                                     <img class="contact-item__icon" src="{% static 'companies/icons/phone.svg'%}">
@@ -113,9 +108,7 @@
                                     <span class="contact-item__link">{{company.email}}</span>
                                 </div>
                             {% endif %}
-
                         </div>
-
                     </div>
 
 
@@ -139,5 +132,4 @@
 
 </main>
 <script src=" {% static 'companies/js/scripts.js' %}"></script>
-
 {%endblock%}
