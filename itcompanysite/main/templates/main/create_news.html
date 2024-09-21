@@ -1,0 +1,16 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Создание новости{% endblock %}
+
+{% block content %}
+<section class="section">
+    <h2>Создать новость</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}  <!-- Выводим все поля формы -->
+        </div>
+        <button type="submit" class="btn btn-primary">Создать новость</button>
+    </form>
+</section>
+{% endblock %}

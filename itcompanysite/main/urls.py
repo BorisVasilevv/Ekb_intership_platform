@@ -5,9 +5,11 @@ from django.conf import settings
 
 urlpatterns = [
     path('', views.index, name='home'),
+    path('create-news/', views.create_news, name='create_news'),
     path('companies/', include('companies.urls')),
     path('map/', views.map, name='map'),
-    path('accounts/', include('accounts.urls'))
+    path('accounts/', include('accounts.urls')),
+    path('internship/', include('internships.urls'))
 ]
 
 if settings.DEBUG:
