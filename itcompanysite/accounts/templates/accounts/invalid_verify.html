@@ -1,0 +1,28 @@
+{%extends 'main/layout.html'%}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+    <link rel="shortcut icon" href="{% static 'main/icons/user.svg'%}" />
+    <link rel="stylesheet" type="text/css" href="{%static 'accounts/css/registration.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'accounts/css/profile.css'%}">
+{% endblock %}
+{% block title %}Ваша ссылка некорректна{%endblock%}
+
+
+{% block content %}
+
+<div class="help">
+    <h1>Что-то пошло не так</h1>
+
+    <div class="message">
+        <h5>Ваша ссылка некорректна, возможно время жизни ссылки истекло, попробуйте войти еще раз </h5>
+
+        <a href="{% url 'login' %}">на страницу входа</a>
+    </div>
+
+</div>
+
+{% endblock %}
+
+

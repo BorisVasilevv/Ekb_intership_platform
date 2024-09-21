@@ -1,0 +1,129 @@
+{%extends 'main/layout.html'%}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+    <link rel="shortcut icon" href="{% static 'main/icons/user.svg'%}" />
+    <link rel="stylesheet" type="text/css" href="{%static 'accounts/css/profile.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'companies/css/companies.css'%}">
+{% endblock %}
+{% block title %}Мой профиль{%endblock%}
+
+{% block content %}
+
+<main class="profile-container">
+
+    <div class="profile-header">
+
+
+        <div class="profile-header__userName">
+            <img class="profile-header__icon" src="{% static 'accounts/icons/user.svg'%}">
+            <span class="userName-text">{{user.username}}</span>
+<!--            <a class="userName-reduction">-->
+<!--                <span>редактировать</span>-->
+<!--                <img class="userName-reduction__icon" src="{% static 'accounts/icons/arrow-right.svg'%}">-->
+<!--            </a>-->
+        </div>
+        <form class="profile-logout" action="{%url 'logout'%}">
+            <button class="profile-logout__button button" type="submit">
+                <img class="profile-logout_icon" src="{% static 'accounts/icons/logout.svg'%}">
+                <span>Выйти</span>
+            </button>
+        </form>
+    </div>
+
+    <div class="profile-header__rect"></div>
+
+    <div class="profile__favourite">
+        <span class="favourite-title">Избранное</span>
+        <div class="companies favourite-companies">
+
+            {% if not companies %}
+                <h4>Здесь пока нет компаний</h4>
+            {% endif %}
+
+            {% for company in companies %}
+                <div id="company-{{company.id}}" class="companies-item">
+                    <div class="companies-item_header">
+                        <a class="companies-item_header-title" href="{{company.url}}">{{ company.name }}</a>
+
+                        {% for subcategory in company.subcategories %}
+                        <button class="subcategory-button" onclick="window.location.href = '{%url 'companies_per_subcategory' subcategory.subcategory_name %}'" style="border-color: {{subcategory.color}}">
+                            <span>{{subcategory.subcategory_name}}</span>
+                        </button>
+                        {% endfor%}
+                    </div>
+
+
+                    <div class="company-item_main">
+                        <div class="companies-item_left">
+                            <a class="companies-item_link" href="{{company.url}}">
+                                <img class="companies-item_link-img" src="{{ company.logotype.url }}">
+                            </a>
+                        </div>
+
+                        <div class="companies-item_description">
+                            <span class="companies-item_about-company">{{company.short_description}}</span>
+
+                            <div class="accreditation">
+                                <img class="accreditation__icon" src="{% static 'companies/icons/check.svg'%}">
+                                <span class="accreditation__text">Аккредитация</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="contacts-container">
+
+                        <span class="contacts-title">Способы связи с компанией для стажировки:</span>
+
+                        <div class="contacts-content">
+
+                            {% if company.telegram is not none%}
+                            <div class="contact-item">
+                                <img class="contact-item__icon" src="{% static 'companies/icons/telegram.svg'%}">
+                                <span class="contact-item__link">{{company.telegram}}</span>
+                            </div>
+                            {% endif %}
+
+                            {% if company.phone is not none%}
+                                <div class="contact-item">
+                                    <img class="contact-item__icon" src="{% static 'companies/icons/phone.svg'%}">
+                                    <span class="contact-item__link">{{company.phone}}</span>
+                                </div>
+                            {% endif %}
+
+                            {% if company.email is not none%}
+                                <div class="contact-item">
+                                    <img class="contact-item__icon" src="{% static 'companies/icons/email.svg'%}">
+                                    <span class="contact-item__link">{{company.email}}</span>
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="companies-item_footer">
+                         <a class="companies-item_footer-link" href="{{company.url}}">
+                            <img class="companies-item_link-icon" src="{% static 'companies/icons/url.svg'%}">
+                            <span class="companies-item_link-text">{{ company.name }}</span>
+                         </a>
+
+                        <button class="companies-item_fav-button remove-fav" id="remove-from-favorites-{{ company.id }}" data-company-id="{{ company.id }}">
+                            <span>Удалить</span>
+                            <img class="fav-button_icon" src="{% static 'accounts/icons/trash-bin.svg'%}">
+                        </button>
+                    </div>
+
+                </div>
+
+            {%endfor%}
+        </div>
+    </div>
+
+</main>
+<script src=" {% static 'companies/js/scripts.js' %}"></script>
+
+{%endblock%}

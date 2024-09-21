@@ -1,0 +1,22 @@
+{%extends 'main/layout.html'%}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+    <link rel="shortcut icon" href="{% static 'main/icons/user.svg'%}" />
+    <link rel="stylesheet" type="text/css" href="{%static 'accounts/css/registration.css'%}">
+{% endblock %}
+{% block title %}Подтвердите email{%endblock%}
+
+
+{% block content %}
+
+<div class="help">
+    <h1>Подтвердите email</h1>
+
+    <h5>На указанную почту было отправлено письмо, пожалуйста подтвердите email для завершения регистрации, не забудьте проверить папку спам</h5>
+</div>
+
+{% endblock %}
+
+

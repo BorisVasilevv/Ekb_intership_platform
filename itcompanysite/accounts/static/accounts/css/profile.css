@@ -1,0 +1,180 @@
+.profile-container{
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+    margin: 15px;
+}
+
+.profile-header{
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.profile-header__icon{
+    height: 100px;
+}
+
+.profile-header__userName{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.userName-text{
+    align-self: center;
+    color: #FFFFFF;
+    font-size: 60px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+.userName-reduction{
+    align-items: baseline;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    gap: 5px;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+}
+
+.userName-reduction__icon{
+    height: 10px;
+}
+
+.profile-header__rect{
+    background-color: #faf446;
+    height: 1px;
+
+}
+
+/*----------------*/
+
+
+.favourite-title{
+    color: #FFFFFF;
+    font-size: 30px;
+    letter-spacing: 0.2px;
+}
+
+.profile-logout{
+    width: 160px;
+}
+
+.profile-logout__button{
+    align-items: center;
+    background-color: #272727;
+    border: 1px solid #272727;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    gap: 10px;
+    letter-spacing: 0.2px;
+    padding: 15px 20px;
+    cursor: pointer;
+}
+
+.profile-logout_icon{
+    height: 30px;
+}
+
+h4{
+    color: #FFFFFF;
+    font-size: 20px;
+    padding: 15px 0;
+}
+
+
+
+@media screen and (max-width: 480px) {
+
+    .profile-container {
+        gap: 25px;
+        margin: 70px 15px 15px 15px;
+    }
+
+    .profile-header__icon {
+        height: 50px;
+    }
+
+    .userName-text {
+        font-size: 30px;
+    }
+
+    .favourite-title {
+        font-size: 26px;
+    }
+
+    h4 {
+        font-size: 16px;
+    }
+
+    .profile-logout {
+        width: 130px;
+    }
+
+     .profile-logout__button{
+        font-size: 14px;
+        gap: 10px;
+        padding: 5px 15px;
+    }
+
+    .profile-logout_icon{
+        height: 25px;
+    }
+}
+
+@media screen and (min-width: 480px) and (max-width: 800px){
+
+    .profile-container {
+        gap: 25px;
+        margin: 70px 15px 15px 15px;
+    }
+
+
+    .profile-header__icon {
+        height: 50px;
+    }
+
+    .userName-text {
+        font-size: 30px;
+    }
+
+    .favourite-title {
+        font-size: 26px;
+    }
+
+    h4 {
+        font-size: 16px;
+    }
+
+    .profile-logout {
+        width: 130px;
+    }
+
+     .profile-logout__button{
+        font-size: 14px;
+        gap: 10px;
+        padding: 5px 15px;
+    }
+
+    .profile-logout_icon{
+        height: 25px;
+    }
+
+
+}
+
+@media screen and (min-width: 800px) and (max-width: 1200px) {
+
+    .profile-container {
+        gap: 25px;
+        margin: 80px 15px 15px 15px;
+    }
+}
+

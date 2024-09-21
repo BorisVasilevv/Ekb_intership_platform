@@ -1,0 +1,43 @@
+{%extends 'main/layout.html'%}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+    <link rel="shortcut icon" href="{% static 'main/icons/user.svg'%}" />
+    <link rel="stylesheet" type="text/css" href="{%static 'accounts/css/registration.css'%}">
+{% endblock %}
+{% block title %}Вход{%endblock%}
+
+
+{% block content %}
+
+<main class="registration-container">
+
+    <div class="registration-header">
+        <span class="registration-header_main"> Вход </span>
+        <form action="{%url 'registration'%}">
+            <button class="registration-button extra-button" type="submit">Регистрация</button>
+        </form>
+    </div>
+
+
+    {% if form.errors %}
+        <p>{{form.non_field_errors}}</p>
+    {% endif %}
+
+    <form action="{% url 'login' %}" method="post" class="registration-form">
+        {% csrf_token %}
+        {% for f in form %}
+            {{f|add_label_class:"registration-help-info"}}
+            {%render_field f class+="input-field"%}
+        {% endfor %}
+        <button class="submit-button" type="submit">Войти</button>
+    </form>
+
+    <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+
+</main>
+
+{% endblock %}
+
+

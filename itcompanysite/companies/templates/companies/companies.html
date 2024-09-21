@@ -1,0 +1,211 @@
+{%extends 'main/layout.html'%}
+{% load static %}
+{% block head %}
+    <link rel="shortcut icon" href="{% static 'main/icons/companies.svg'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'companies/css/companies.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/categories.css'%}">
+{% endblock %}
+
+{%block title%}Компании{%endblock%}
+
+<!--Фильтры по тегам-->
+{% block filters %}
+    {% if tags is not none %}
+        <div class="tags">
+            {% for tag in tags %}
+                <div class="tag-container">
+                    {% if tag.is_checked%}
+                        <input class="checkbox" type="checkbox" value="{{tag.id}}" name="tags" checked="checked">
+                    {% else %}
+                        <input class="checkbox" type="checkbox" value="{{tag.id}}" name="tags">
+                    {% endif %}
+
+                    <span class="checkmark" ></span>
+                    <h5>{{tag.name}}</h5>
+                </div>
+            {% endfor%}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{%block content%}
+
+<!--В случае если пользователь перешёл в конкретную категорию/подкатегорию её название и описание пишется сверху-->
+{% if category_or_subcategory %}
+    <section class="section section-category">
+        {% if category_or_subcategory.subcategory_name %}
+            <span class="section-title border-none">{{category_or_subcategory.subcategory_name}}</span>
+        {% endif %}
+        {% if category_or_subcategory.category_name %}
+            <span class="section-title border-none">{{category_or_subcategory.category_name}}</span>
+        {% endif %}
+        <span class="section-subtitle">{{category_or_subcategory.description}}</span>
+    </section>
+{% endif %}
+
+<!--Query result-->
+{% if query %}
+    <span class="section-subtitle">Выданы результаты по запросу {{query}}</span>
+{% endif %}
+
+<!--Фильтры по подкатегориям-->
+{% if subcategories %}
+    <div class="subcategory-buttons">
+        {% for subcategory in subcategories %}
+            <button class="subcategory-button" data-category="{{ subcategory.subcategory_name }}" style="border-color: {{ subcategory.color }};">{{ subcategory.subcategory_name }}</button>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<main class="companies">
+    {% for company in result_companies %}
+
+        <div class="companies-item" data-category="{{ company.subcategories }}">
+
+            <div class="companies-item_header">
+                <a class="companies-item_header-title" href="{{company.url}}">{{ company.name }}</a>
+                {% for subcategory in company.subcategories %}
+                    <button class="header_category-button" onclick="window.location.href = '{%url 'companies_per_subcategory' subcategory.subcategory_name %}'" style="border-color: {{subcategory.color}}">
+                        <span>{{subcategory.subcategory_name}}</span>
+                    </button>
+                {% endfor%}
+            </div>
+
+
+            <div class="companies-item_tags">
+                 {% if company.tags is not none %}
+                    {% for tag in company.tags %}
+                        <div class="tag-container">
+                            <img class="hashtag_icon" src="{% static 'companies/icons/hashtag.svg'%}">
+                            <h5>{{tag.name}}</h5>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="company-item_main">
+                <a class="companies-item_link" href="{{company.url}}">
+                    <img class="companies-item_link-img" src="{{ company.logotype.url }}">
+                </a>
+                <div class="companies-item_description">
+                  <!--  <div class="companies-item-tags">
+                        <span class="companies-item-tag">Frontend</span>
+                        <span class="companies-item-tag">1C</span>
+                        <span class="companies-item-tag">BI</span>
+                        <span class="companies-item-tag">Android</span>
+                    </div> -->
+                    <span class="companies-item_about-company">{{company.short_description}}</span>
+                    {% if company.accreditation %}
+                        <div class="accreditation">
+                            <img class="accreditation__icon" src="{% static 'companies/icons/check.svg'%}">
+                            <span class="accreditation__text">Аккредитация</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if company.phone is not none or company.telegram is not none or company.email is not none %}
+                <div class="contacts-container">
+                    <span class="contacts-title">Способы связи с компанией для стажировки:</span>
+                    <div class="contacts-content">
+                        {% if company.telegram is not none%}
+                            <div class="contact-item">
+                                <img class="contact-item__icon" src="{% static 'companies/icons/telegram.svg'%}">
+                                <span class="contact-item__link">{{company.telegram}}</span>
+                            </div>
+                        {% endif %}
+
+                        {% if company.phone is not none%}
+                            <div class="contact-item">
+                                <img class="contact-item__icon" src="{% static 'companies/icons/phone.svg'%}">
+                                <span class="contact-item__link">{{company.phone}}</span>
+                            </div>
+                        {% endif %}
+
+                        {% if company.email is not none%}
+                            <div class="contact-item">
+                                <img class="contact-item__icon" src="{% static 'companies/icons/email.svg'%}">
+                                <span class="contact-item__link">{{company.email}}</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="companies-item_footer">
+                <a class="companies-item_footer-link" href="{{company.url}}">
+                    <img class="companies-item_link-icon" src="{% static 'companies/icons/url.svg'%}">
+                    <span class="companies-item_link-text">{{ company.name }}</span>
+                </a>
+                {% if not user.is_authenticated %}
+                    <div class="" id="add-to-favorites-container-{{ company.id }}">
+                            <button class="companies-item_fav-button add-fav" id="add-to-favorites-{{ company.id }}" data-company-id="{{ company.id }}" data-register-modal="#registerModal">
+                                <img class="fav-button_icon" src="{% static 'companies/icons/heart.svg'%}">
+                                <span>Избранное</span>
+                            </button>
+                    </div>
+                {% else %}
+                    {% if company.is_favorite %}
+                        <div class="hidden" id="add-to-favorites-container-{{ company.id }}">
+                            <button class="companies-item_fav-button add-fav" id="add-to-favorites-{{ company.id }}" data-company-id="{{ company.id }}"  >
+                                <img class="fav-button_icon" src="{% static 'companies/icons/heart.svg'%}">
+                                <span>Избранное</span>
+                            </button>
+                        </div>
+
+                        <div class="" id="remove-to-favorites-container-{{ company.id }}">
+                            <button class="companies-item_fav-button remove-fav" id="remove-from-favorites-{{ company.id }}" data-company-id="{{ company.id }}">
+                                <img class="fav-button_icon" src="{% static 'companies/icons/heart_full.svg'%}">
+                                <span>В избранном</span>
+                            </button>
+                        </div>
+                    {% else %}
+                         <div class="" id="add-to-favorites-container-{{ company.id }}">
+                            <button class="companies-item_fav-button add-fav" id="add-to-favorites-{{ company.id }}" data-company-id="{{ company.id }}" >
+                                <img class="fav-button_icon" src="{% static 'companies/icons/heart.svg'%}">
+                                <span>Избранное</span>
+                            </button>
+                        </div>
+
+                        <div class="hidden" id="remove-to-favorites-container-{{ company.id }}">
+                            <button class="companies-item_fav-button remove-fav" id="remove-from-favorites-{{ company.id }}" data-company-id="{{ company.id }}">
+                                <img class="fav-button_icon" src="{% static 'companies/icons/heart_full.svg'%}">
+                                <span>В избранном</span>
+                            </button>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+
+            </div>
+        </div>
+    {% endfor%}
+</main>
+
+<div class="register_modal" id="register_modal">
+    <div class="register_modal__window" id="register_modal__window">
+        <div class="register_modal__header">
+            <span class="register_modal-title">Вы не авторизованы!</span>
+            <button data-hystclose class="register_modal__close-button">
+                <img class="register_modal__close-button_icon" src="{% static 'companies/icons/close.svg'%}">
+            </button>
+        </div>
+        <div class="register_modal__content">
+            <span class="register_modal-text">
+                Для того чтобы добавлять в избранное войдите в аккаунт
+                или зарегистрируйтесь на сайте <br/> <br/>
+             </span>
+            <a class="register_modal-link" href="{%url 'login'%}">
+                Вход
+            </a>
+            <span class="register_modal-text">  /  </span>
+            <a class="register_modal-link" href="{%url 'registration'%}">
+                Регистрация
+            </a>
+        </div>
+    </div>
+</div>
+
+<script src=" {% static 'companies/js/scripts.js' %}"></script>
+<script src=" {% static 'companies/js/filters.js' %}"></script>
+{%endblock%}
