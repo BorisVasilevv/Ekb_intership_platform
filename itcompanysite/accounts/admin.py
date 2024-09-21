@@ -7,6 +7,13 @@ User = get_user_model()
 
 @admin.register(User)
 class UserAdmin(UserAdmin):
+    # Поля, которые будут отображаться в списке пользователей
+    list_display = ('email', 'username', 'role', 'is_active', 'is_staff', 'email_verify')
+
+    # Поля, которые можно редактировать при создании/редактировании пользователя
+    fieldsets = UserAdmin.fieldsets + (
+        (None, {'fields': ('role',)}),  # Добавляем поле 'role'
+    )
     add_form = MyUserCreationForm
     add_fieldsets = (
         (
