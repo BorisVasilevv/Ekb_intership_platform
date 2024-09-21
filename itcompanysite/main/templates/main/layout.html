@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'main/css/main.css'%}">
     <link rel="stylesheet" href="{% static 'main/css/categories.css'%}">
     <link rel="stylesheet" href="{% static 'main/css/map.css'%}">
+    <link rel="stylesheet" href="{% static 'main/css/news_slider.css'%}">
 
 
     {% block head %} {% endblock %}
@@ -17,11 +18,11 @@
 </head>
 <body>
     <div class="main-header">
-{#        <div class="site-logo-container">#}
-{#            <a class="site-logo__href" href="{%url 'home'%}">#}
-{#                <img class="main-logo" src="{% static 'main/img/logoCSU.png'%}">#}
-{#            </a>#}
-{#        </div>#}
+        <div class="site-logo-container">
+            <a class="site-logo__href" href="{%url 'home'%}">
+                <img class="main-logo" src="{% static 'main/icons/home.svg'%}">
+            </a>
+        </div>
         <form action="{% url 'search'%}" method="get" class="search-form">
             <div class="search-container">
                 <input class="search-row" placeholder="Введите название компании..."  autocomplete="off" type="search" name="q" required="">

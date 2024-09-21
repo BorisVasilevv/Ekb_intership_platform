@@ -1,0 +1,32 @@
+.section-news {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 30px 50px;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 40px 0;
+}
+
+.news_img{
+    width: 100px;
+    height: 100px;
+}
+
+.swiper-slide {
+    text-align: center;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: auto;
+}
+
+.swiper-slide h3 {
+    margin-top: 10px;
+    font-size: 18px;
+}
