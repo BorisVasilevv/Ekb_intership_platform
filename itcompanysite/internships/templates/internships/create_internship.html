@@ -5,6 +5,7 @@
 {% block head %}
     <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/registration.css' %}">
 {% endblock %}
+
 {% block title %}Создание стажировки{% endblock %}
 
 {% block content %}
@@ -16,11 +17,11 @@
     <form method="post" class="registration-form">
         {% csrf_token %}
 
-        {% for f in form.as_p %}
-            {% if f.name != 'role' %}  <!-- Исключаем поле role из отображения -->
-                {{ f|add_label_class:"registration-help-info" }}
-                {% render_field f class+="input-field" %}
-                {{ f.errors }}
+        {% for field in form %}
+            {% if field.name != 'role' %}
+                <!-- Удалил field.label_tag, т.к. render_field уже выводит и поле, и метку -->
+                {% render_field field class+="input-field" %}
+                {{ field.errors }}
             {% endif %}
         {% endfor %}
 
