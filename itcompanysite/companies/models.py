@@ -177,24 +177,22 @@ class CompanyAddress(models.Model):
         verbose_name = 'CompanyAddress'
         verbose_name_plural = 'CompanyAddresses'
 
-class Tag(models.Model):
-    name = models.CharField('street', max_length=150)
+class Internship(models.Model):
 
-    def __str__(self):
-        return self.name
+    all_places = models.IntegerField('all_places')
+    available_places = models.IntegerField('available_places')
+    time_type_work = models.TextField('time_type_work')
+    date_start = models.DateField('date_start')
+    date_end = models.DateField('date_end')
+    description = models.TextField('description', default="")
+    company = models.ForeignKey(Company, on_delete=models.DO_NOTHING,  default='')
+    company_address = models.ForeignKey(CompanyAddress, on_delete=models.DO_NOTHING, default='')
 
-    class Meta:
-        verbose_name = 'Tag'
-        verbose_name_plural = 'Tags'
-
-
-class CompanyTag(models.Model):
-    tag = models.ForeignKey(Tag, on_delete=models.DO_NOTHING, default='')
-    company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, default='')
-
-    def __str__(self):
-        return "%s имеет тег %s" % (self.company, self.tag)
+def __str__(self):
+    return self.subcategory_name
 
     class Meta:
-        verbose_name = 'CompanyTag'
-        verbose_name_plural = 'CompanyTags'
+        verbose_name = 'Intership'
+        verbose_name_plural = 'Interships'
+
+

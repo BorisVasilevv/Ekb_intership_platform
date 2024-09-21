@@ -10,22 +10,7 @@
 
 <!--Фильтры по тегам-->
 {% block filters %}
-    {% if tags is not none %}
-        <div class="tags">
-            {% for tag in tags %}
-                <div class="tag-container">
-                    {% if tag.is_checked%}
-                        <input class="checkbox" type="checkbox" value="{{tag.id}}" name="tags" checked="checked">
-                    {% else %}
-                        <input class="checkbox" type="checkbox" value="{{tag.id}}" name="tags">
-                    {% endif %}
 
-                    <span class="checkmark" ></span>
-                    <h5>{{tag.name}}</h5>
-                </div>
-            {% endfor%}
-        </div>
-    {% endif %}
 {% endblock %}
 
 {%block content%}
