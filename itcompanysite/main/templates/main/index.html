@@ -12,82 +12,89 @@
     <section class="section-greeting">
         <div class="section-greeting__description">
             <span class="section-greeting__headline">У НАС ТЫ НАЙДЕШЬ КОМПАНИЮ МЕЧТЫ</span>
-            <span class="section-greeting__sub-headline">Мы собрали информацию о компаниях Челябинска, чтобы помочь вам окунуться в мир IT</span>
+            <span class="section-greeting__sub-headline">Мы собрали информацию о компаниях Екатеринбурга, чтобы помочь вам окунуться в проффесиональный мир</span>
         </div>
 
     </section>
 
-    <section class="section section-map">
-        <span class="section-title categories_title">Карта компаний</span>
-        <span class="section-subtitle"></span>
+    <section class="section section-news">
+        <span class="section-title categories_title">НОВОСТИ</span>
+        <span class="section-subtitle">Здесь вы увидите последние новости сайта!</span>
 
-        <div id="main-page-map-container" class="main-page-map-container">
-            <div id="map" style="width: 100%; height: 100%;"></div>
-        </div>
 
     </section>
 
-    <section class="section section-categories">
-        <span class="section-title">Категории</span>
-        <span class="section-subtitle categories_subtitle">Мы разбили компании на удобные категории после проведения анализа рынка. Теперь вам легко выбрать область, которая вас интересует, и найти подходящую компанию для карьерного роста.</span>
-
-        <div class="categories-container">
-            {% for category in categories %}
-                <div class="main-category" style="border-color: {{category.color}}">
-                    <div class="main-category_header">
-                        <div class="main-category_header-upper">
-                            <a class="main-category_header-title" target="_blank" onclick="window.location.href = 'companies/{{category.category_name}}'">{{category.category_name}}</a>
-                            <a class="categories-item_button" onclick="window.location.href = 'companies/{{category.category_name}}'">Перейти</a>
-                        </div>
-
-                        <details class="categories-item_details">
-                            <summary  class="categories-item_summary">Описание</summary>
-                            <span class="categories-item_description">{{category.description}}</span>
-                        </details>
-                    </div>
-                    <div class="main-category_subcategories">
-                        {% for subcategory in category.subcategories %}
-                                <div  class="categories-item" style="border-color: {{subcategory.color}}">
-                                    <a class="categories-item_title" onclick="window.location.href = 'companies/{{subcategory.subcategory_name}}'">{{subcategory.subcategory_name}}</a>
-                                    <details class="categories-item_details">
-                                        <summary class="categories-item_summary">Описание</summary>
-                                        <span class="categories-item_description">{{subcategory.description}}</span>
-                                    </details>
-                                        <a class="categories-item_button"  onclick="window.location.href = 'companies/{{subcategory.subcategory_name}}'">Перейти</a>
-                                </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </section>
-
-<script>
-    ymaps.ready(init);
-    function init() {
-        var myMap = new ymaps.Map('map', {
-            center: ["{{city.coordinate_x|safe}}", "{{city.coordinate_y|safe}}"],
-            zoom: 12,
-            controls: []
-        });
-
-        var searchControl = new ymaps.control.SearchControl({
-            options: {
-                provider: 'yandex#search'
-            }
-        });
-        myMap.controls.add(searchControl);
-
-
-        {% for company_with_address in companies_with_address %}
-            var placemark = new ymaps.Placemark(["{{company_with_address.coordinate_x|safe}}", "{{company_with_address.coordinate_y|safe}}"], {
-                hintContent: "{{company_with_address.name|safe}}",
-                balloonContent: "Компания {{company_with_address.name|safe}}. Адрес: {{company_with_address.address|safe}}"
-            }, {
-                iconColor: "{{company_with_address.color|safe}}"
-            });
-        myMap.geoObjects.add(placemark);
-        {% endfor %}
-    }
-</script>
+{#    <section class="section section-map">#}
+{#        <span class="section-title categories_title">Карта компаний</span>#}
+{#        <span class="section-subtitle"></span>#}
+{##}
+{#        <div id="main-page-map-container" class="main-page-map-container">#}
+{#            <div id="map" style="width: 100%; height: 100%;"></div>#}
+{#        </div>#}
+{##}
+{#    </section>#}
+{##}
+{#    <section class="section section-categories">#}
+{#        <span class="section-title">Категории</span>#}
+{#        <span class="section-subtitle categories_subtitle">Мы разбили компании на удобные категории после проведения анализа рынка. Теперь вам легко выбрать область, которая вас интересует, и найти подходящую компанию для карьерного роста.</span>#}
+{##}
+{#        <div class="categories-container">#}
+{#            {% for category in categories %}#}
+{#                <div class="main-category" style="border-color: {{category.color}}">#}
+{#                    <div class="main-category_header">#}
+{#                        <div class="main-category_header-upper">#}
+{#                            <a class="main-category_header-title" target="_blank" onclick="window.location.href = 'companies/{{category.category_name}}'">{{category.category_name}}</a>#}
+{#                            <a class="categories-item_button" onclick="window.location.href = 'companies/{{category.category_name}}'">Перейти</a>#}
+{#                        </div>#}
+{##}
+{#                        <details class="categories-item_details">#}
+{#                            <summary  class="categories-item_summary">Описание</summary>#}
+{#                            <span class="categories-item_description">{{category.description}}</span>#}
+{#                        </details>#}
+{#                    </div>#}
+{#                    <div class="main-category_subcategories">#}
+{#                        {% for subcategory in category.subcategories %}#}
+{#                                <div  class="categories-item" style="border-color: {{subcategory.color}}">#}
+{#                                    <a class="categories-item_title" onclick="window.location.href = 'companies/{{subcategory.subcategory_name}}'">{{subcategory.subcategory_name}}</a>#}
+{#                                    <details class="categories-item_details">#}
+{#                                        <summary class="categories-item_summary">Описание</summary>#}
+{#                                        <span class="categories-item_description">{{subcategory.description}}</span>#}
+{#                                    </details>#}
+{#                                        <a class="categories-item_button"  onclick="window.location.href = 'companies/{{subcategory.subcategory_name}}'">Перейти</a>#}
+{#                                </div>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#    </section>#}
+{##}
+{#<script>#}
+{#    ymaps.ready(init);#}
+{#    function init() {#}
+{#        var myMap = new ymaps.Map('map', {#}
+{#            center: ["{{city.coordinate_x|safe}}", "{{city.coordinate_y|safe}}"],#}
+{#            zoom: 12,#}
+{#            controls: []#}
+{#        });#}
+{##}
+{#        var searchControl = new ymaps.control.SearchControl({#}
+{#            options: {#}
+{#                provider: 'yandex#search'#}
+{#            }#}
+{#        });#}
+{#        myMap.controls.add(searchControl);#}
+{##}
+{##}
+{#        {% for company_with_address in companies_with_address %}#}
+{#            var placemark = new ymaps.Placemark(["{{company_with_address.coordinate_x|safe}}", "{{company_with_address.coordinate_y|safe}}"], {#}
+{#                hintContent: "{{company_with_address.name|safe}}",#}
+{#                balloonContent: "Компания {{company_with_address.name|safe}}. Адрес: {{company_with_address.address|safe}}"#}
+{#            }, {#}
+{#                iconColor: "{{company_with_address.color|safe}}"#}
+{#            });#}
+{#        myMap.geoObjects.add(placemark);#}
+{#        {% endfor %}#}
+{#    }#}
+{#</script>#}
 {%endblock%}
