@@ -72,7 +72,6 @@ class Company(models.Model):
     logotype = models.ImageField('logotype', upload_to='companies/logo/img')
     short_description = models.TextField('short_description')
     url = models.CharField('url', max_length=200)
-    accreditation = models.BooleanField('accreditation')
     phone = models.CharField('phone', max_length=200, null=True, blank=True)
 
     def __str__(self):
@@ -175,3 +174,6 @@ class CompanyFiles(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, default='')
     file = models.ForeignKey(File, on_delete=models.CASCADE(), default='')
 
+class CompanyUser(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
