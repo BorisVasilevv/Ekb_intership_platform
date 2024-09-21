@@ -83,6 +83,52 @@ document.addEventListener('DOMContentLoaded', function () {
         remove_container.classList.toggle("hidden");
         add_container.classList.toggle("hidden");
     }
+
+    document.getElementById('addDocumentButton').addEventListener('click', function() {
+        document.getElementById('fileInput').click(); // Открываем диалог выбора файла
+    });
+
+    document.getElementById('fileInput').addEventListener('change', function() {
+        let file = this.files[0];
+
+        let formData = new FormData();
+        formData.append('document_text', file);
+        formData.append('document_name', file.name);
+
+        fetch('upload/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+//                alert('Файл успешно загружен');
+            } else if (data.errors) {
+//                alert('Ошибка при загрузке файла');
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+        });
+    });
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
 });
 
 
@@ -128,6 +174,3 @@ function addBlockingScroll(){
     //при открытии окна без прыжка скроллбар
 
 }
-
-
-

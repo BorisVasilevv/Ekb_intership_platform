@@ -1,14 +1,13 @@
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.views import LoginView
 from django.core.exceptions import ValidationError
-from django.db.models import QuerySet
 from django.shortcuts import render, redirect
-from .forms import UserCreationForm
 from django.contrib.auth import login
 from companies.models import Company, Favorite, CompanyCategory
 from django.utils.http import urlsafe_base64_decode
 from django.views import View
 from .forms import MyAuthenticationForm, CompanyCreationForm, StudentCreationForm, EducationCreationForm
+from .models import File, UserFiles
 from .utils import send_email_for_verify
 from django.contrib.auth.tokens import default_token_generator as token_generator
 from django.http import JsonResponse
@@ -16,6 +15,8 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_protect
 from .helpstructure import CompanyWithCategoryData
 from django.http import Http404
+from django.views.decorators.csrf import csrf_exempt
+import django.utils.timezone
 
 User = get_user_model()
 
@@ -61,15 +62,21 @@ def profile(request):
         result_companies.append(CompanyWithCategoryData(comp.id, comp.name, comp.logotype, comp.short_description,
                                                         comp.url, categories_by_comp, subcategories_by_comp,
                                                         comp.phone, comp.telegram, comp.accreditation, comp.email))
-    
+
+    user_files = UserFiles.objects.filter(user_id=user.id)
+    files = [user_file.file for user_file in user_files]
+    context = {
+        'companies': result_companies,
+        'files': files
+    }
     if user.is_student():
-        return render(request, 'accounts/profile.html', {'companies': result_companies})
+        return render(request, 'accounts/profile.html', context)
     elif user.is_admin():
-        return render(request, 'accounts/profile_admin.html', {'companies': result_companies})
+        return render(request, 'accounts/profile_admin.html', context)
     elif user.is_company():
-        return render(request, 'accounts/profile_company.html', {'companies': result_companies})
+        return render(request, 'accounts/profile_company.html', context)
     elif user.is_educational_institution():
-        return render(request, 'accounts/profile_educational_institution.html', {'companies': result_companies})
+        return render(request, 'accounts/profile_educational_institution.html', context)
     else:
         raise Http404("User type not recognized")
 
@@ -115,6 +122,29 @@ def remove_from_favorites(request, company_id):
     else:
         return JsonResponse({'status': 'error', 'message': 'Пользователь не аутентифицирован.'})
 
+
+@csrf_exempt
+def upload_document(request):
+    if request.method == 'POST':
+        document_text = request.FILES.get('document_text')  # Получаем файл
+        document_name = request.POST.get('document_name')  # Получаем имя документа
+        user_id = request.user.id  # Если пользователь аутентифицирован, можно использовать request.user
+
+        if document_text and document_name:
+            # Создаём объект File
+            file_instance = File.objects.create(
+                document_text=document_text,
+                document_name=document_name,
+                created_at=django.utils.timezone.now()
+            )
+            # Связываем пользователя с файлом
+            UserFiles.objects.create(user=request.user, file=file_instance)
+
+            return JsonResponse({'message': 'Файл успешно загружен'}, status=200)
+        else:
+            return JsonResponse({'errors': 'Файл или имя документа не переданы'}, status=400)
+
+    return JsonResponse({'message': 'Метод не разрешён'}, status=405)
 
 class MyLoginView(LoginView):
     template_name = "accounts/login.html"
