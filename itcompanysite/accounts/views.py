@@ -8,38 +8,55 @@ from django.contrib.auth import login
 from companies.models import Company, Favorite, CompanyCategory
 from django.utils.http import urlsafe_base64_decode
 from django.views import View
-from .forms import MyUserCreationForm, MyAuthenticationForm
+from .forms import MyAuthenticationForm, CompanyCreationForm, StudentCreationForm, EducationCreationForm
 from .utils import send_email_for_verify
 from django.contrib.auth.tokens import default_token_generator as token_generator
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_protect
 from .helpstructure import CompanyWithCategoryData
+from django.http import Http404
 
 User = get_user_model()
 
 
 def registration(request):
     if request.method == 'POST':
-        user_reg_form = MyUserCreationForm(request.POST)
+        user_type = request.POST.get('role')
+        
+        if user_type == 'company':
+            user_reg_form = CompanyCreationForm(request.POST)
+        elif user_type == 'educational_institution': 
+            user_reg_form = EducationCreationForm(request.POST)
+        else:
+            user_reg_form = StudentCreationForm(request.POST)
+         
         if user_reg_form.is_valid():
             new_user = user_reg_form.save()
             send_email_for_verify(request, new_user)
             return redirect('/accounts/confirm_email/')
-        context = {'user_form': user_reg_form}
-        return render(request, 'accounts/registration.html', context)
-    else:
-        user_reg_form = MyUserCreationForm()
-        roles = [role[0] for role in User.ROLE_CHOICES]
-        roles.remove('admin')
-        context = {'user_form': user_reg_form, 'roles': roles}
-        return render(request, 'accounts/registration.html', context)
+        
+        return render(request, 'accounts/registration.html', {'user_form': user_reg_form, 'role': user_type})
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        if user_type == 'company':
+            form = CompanyCreationForm()
+        elif user_type == 'educational_institution': 
+            form = EducationCreationForm()
+        else:
+            form = StudentCreationForm()
+        return render(request, 'accounts/registration.html', {'user_form': form, 'role': user_type})
+
+    roles = [role[0] for role in User.ROLE_CHOICES if role[0] != 'admin']
+    return render(request, 'accounts/chosen_role_reg.html', {'roles': roles})
 
 
 def profile(request):
-    favorite_entries = Favorite.objects.filter(user_id=request.user.id)
+    user = request.user
+    favorite_entries = Favorite.objects.filter(user_id=user.id)
     companies_for_user = [entry.company for entry in favorite_entries]
     result_companies = []
+    
     for comp in companies_for_user:
         company_categories = CompanyCategory.objects.filter(company_id=comp.id)
         subcategories_by_comp = [company_categoty.subcategory for company_categoty in company_categories]
@@ -47,7 +64,17 @@ def profile(request):
         result_companies.append(CompanyWithCategoryData(comp.id, comp.name, comp.logotype, comp.short_description,
                                                         comp.url, categories_by_comp, subcategories_by_comp,
                                                         comp.phone, comp.telegram, comp.accreditation, comp.email))
-    return render(request, 'accounts/profile.html', {'companies': result_companies})
+    
+    if user.is_student():
+        return render(request, 'accounts/profile.html', {'companies': result_companies})
+    elif user.is_admin():
+        return render(request, 'accounts/profile_admin.html', {'companies': result_companies})
+    elif user.is_company():
+        return render(request, 'accounts/profile_company.html', {'companies': result_companies})
+    elif user.is_educational_institution():
+        return render(request, 'accounts/profile_educational_institution.html', {'companies': result_companies})
+    else:
+        raise Http404("User type not recognized")
 
 
 class EmailView(View):

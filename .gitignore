@@ -8,3 +8,7 @@ itcompanysite/companies/.env
 itcompanysite/itcompanysite/.env
 itcompanysite/db.sqlite3
 *.sqlite3
+
+itcompanysite/accounts/migrations/
+
+*.png
