@@ -85,8 +85,16 @@
 }
 
 .user-button{
+    color: #FFFFFF;
     font-size: 20px;
+    padding: 5px;
+    margin: 10px ;
 }
+
+.user-button:hover{
+    border-bottom-color: #faf446;
+}
+
 
 .registration-user_type{
     font-size: 20px;

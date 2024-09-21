@@ -19,6 +19,11 @@ urlpatterns = [
         name='invalid_verify'
     ),
     path(
+        'invalid_verify/',
+        TemplateView.as_view(template_name='accounts/invalid_verify.html'),
+        name='invalid_verify'
+    ),
+    path(
         'confirm_email/',
         TemplateView.as_view(template_name='accounts/confirm_email.html'),
         name='confirm_email'

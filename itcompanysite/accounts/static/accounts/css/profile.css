@@ -111,6 +111,18 @@
     max-width: 300px;
 }
 
+.request_button{
+    background-color: #272727;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 10px;
+    text-decoration: none;
+    padding: 10px ;
+    cursor: pointer;
+    max-width: 200px;
+}
+
 h4{
     color: #FFFFFF;
     font-size: 20px;
