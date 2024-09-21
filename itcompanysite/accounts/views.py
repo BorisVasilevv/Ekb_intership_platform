@@ -24,29 +24,26 @@ User = get_user_model()
 def registration(request):
     if request.method == 'POST':
         user_type = request.POST.get('role')
-        
+
         if user_type == 'company':
             user_reg_form = CompanyCreationForm(request.POST)
-        elif user_type == 'educational_institution': 
+        elif user_type == 'educational_institution':
             user_reg_form = EducationCreationForm(request.POST)
         else:
             user_reg_form = StudentCreationForm(request.POST)
-         
-        if user_reg_form.is_valid():
-            new_user = user_reg_form.save()
-            send_email_for_verify(request, new_user)
-            return redirect('/accounts/confirm_email/')
-        
-        return render(request, 'accounts/registration.html', {'user_form': user_reg_form, 'role': user_type})
 
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        if user_type == 'company':
-            form = CompanyCreationForm()
-        elif user_type == 'educational_institution': 
-            form = EducationCreationForm()
+        if user_reg_form.is_valid():
+            # Установите роль здесь
+            user_reg_form.cleaned_data['role'] = user_type
+
+            # Присваиваем роль перед сохранением
+            user = user_reg_form.save(commit=True)  # Теперь сохранение вызовет создание других объектов
+            send_email_for_verify(request, user)
+            return redirect('/accounts/confirm_email/')
         else:
-            form = StudentCreationForm()
-        return render(request, 'accounts/registration.html', {'user_form': form, 'role': user_type})
+            print(user_reg_form.errors)  # Логируем ошибки для диагностики
+
+        return render(request, 'accounts/registration.html', {'user_form': user_reg_form, 'role': user_type})
 
     roles = [role[0] for role in User.ROLE_CHOICES if role[0] != 'admin']
     return render(request, 'accounts/chosen_role_reg.html', {'roles': roles})
