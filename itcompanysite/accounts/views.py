@@ -30,7 +30,9 @@ def registration(request):
         return render(request, 'accounts/registration.html', context)
     else:
         user_reg_form = MyUserCreationForm()
-        context = {'user_form': user_reg_form}
+        roles = [role[0] for role in User.ROLE_CHOICES]
+        roles.remove('admin')
+        context = {'user_form': user_reg_form, 'roles': roles}
         return render(request, 'accounts/registration.html', context)
 
 

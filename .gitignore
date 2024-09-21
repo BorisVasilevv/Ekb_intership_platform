@@ -6,3 +6,4 @@
 itcompanysite/companies/.env
 
 itcompanysite/itcompanysite/.env
+itcompanysite/db.sqlite3
