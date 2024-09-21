@@ -233,3 +233,20 @@ h4{
     }
 }
 
+.rectangle_file {
+    height:120px;
+    width:120px;
+    font-size: 14px;
+    font-color: #FFFFFF;
+}
+
+.profile_documents{
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+
