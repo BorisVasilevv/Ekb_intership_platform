@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css"  href="{% static 'main/css/reset.css'%}">
+    <link rel="stylesheet" type="text/css"  href="{% static 'main/css/font.css'%}">
+    <link rel="stylesheet" href="{% static 'main/css/main.css'%}">
+    <link rel="stylesheet" href="{% static 'main/css/categories.css'%}">
+    <link rel="stylesheet" href="{% static 'main/css/map.css'%}">
+
+
+    {% block head %} {% endblock %}
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    <div class="main-header">
+        <div class="site-logo-container">
+            <a class="site-logo__href" href="{%url 'home'%}">
+                <img class="main-logo" src="{% static 'main/img/logoCSU.png'%}">
+            </a>
+        </div>
+        <form action="{% url 'search'%}" method="get" class="search-form">
+            <div class="search-container">
+                <input class="search-row" placeholder="Введите название компании..."  autocomplete="off" type="search" name="q" required="">
+                <button class="search-button" type="submit">
+                <img class="search-button-image" src="{% static 'main/icons/search.svg' %}">
+            </button>
+            </div>
+
+            {% block filters %} {% endblock %}
+        </form>
+
+        <div class="navigation-elem">
+            <a class="navigation-elem-link" href="{%url 'home'%}">
+                <img class="navigation-elem-icon" src="{% static 'main/icons/home.svg'%}">Главная
+            </a>
+        </div>
+        <div class="navigation-elem">
+            <a class="navigation-elem-link" href="{%url 'companies'%}">
+                <img class="navigation-elem-icon" src="{% static 'main/icons/companies.svg'%}">Компании
+            </a>
+        </div>
+        <div class="navigation-elem">
+            <a class="navigation-elem-link" href="{%url 'map'%}">
+                <img class="navigation-elem-icon" src="{% static 'main/icons/map.svg'%}">Карта
+            </a>
+        </div>
+        {% if user.is_authenticated %}
+            <div class="navigation-elem">
+                <a class="navigation-elem-link" href="{%url 'profile'%}">
+                    <img class="navigation-elem-icon" src="{% static 'main/icons/user.svg'%}">Мой профиль
+                </a>
+            </div>
+        {% else %}
+            <div class="navigation-elem">
+                <a class="navigation-elem-link" href="{%url 'registration'%}">
+                    <img class="navigation-elem-icon" src="{% static 'main/icons/user.svg'%}">Регистрация
+                </a>
+            </div>
+        {% endif %}
+
+        <nav class="menu-wrap">
+            <label for="menu-toggle">
+                <img class="menu-icon" src="{% static 'main/icons/menu.svg'%}">
+            </label>
+            <input id="menu-toggle" type="checkbox">
+
+            <ul class="menu clearfix">
+                <li>
+                    <a class="navigation-elem-link" href="{%url 'home'%}">
+                        <img class="navigation-elem-icon" src="{% static 'main/icons/home.svg'%}">Главная
+                    </a>
+                </li>
+                <li>
+                    <a class="navigation-elem-link" href="{%url 'companies'%}">
+                        <img class="navigation-elem-icon" src="{% static 'main/icons/companies.svg'%}">Компании
+                    </a>
+                </li>
+                <li>
+                    <a class="navigation-elem-link" href="{%url 'map'%}">
+                        <img class="navigation-elem-icon" src="{% static 'main/icons/map.svg'%}">Карта
+                    </a>
+                </li>
+                <li>
+                    {% if user.is_authenticated %}
+                    <a class="navigation-elem-link" href="{%url 'profile'%}">
+                        <img class="navigation-elem-icon" src="{% static 'main/icons/user.svg'%}">Мой профиль
+                    </a>
+                    {% else %}
+                    <a class="navigation-elem-link" href="{%url 'registration'%}">
+                        <img class="navigation-elem-icon" src="{% static 'main/icons/user.svg'%}">Регистрация
+                    </a>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+    </div>
+    {% block content %}
+
+    {% endblock %}
+
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-content__text">
+                <span>Сайт создан студентами<br> института информационных технологий</span>
+            </div>
+            <a class="site-logo__href" href="https://iit.csu.ru/">
+                <span class="IIT-logo">IIT</span>
+            </a>
+            <a class="site-logo__href" href="https://abit.csu.ru/">
+                <img class="main-logo" src="{% static 'main/img/logoCSU.png'%}">
+            </a>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

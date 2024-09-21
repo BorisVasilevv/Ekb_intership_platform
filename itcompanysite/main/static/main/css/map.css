@@ -1,0 +1,328 @@
+.map-page-container{
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    font-family: Gilroy;
+    margin: 10px 10px 50px 10px
+}
+
+.main-map-section{
+    color: #FFFFFF;
+
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+}
+
+
+
+.map-header{
+    align-items: center;
+    border-bottom: 1px solid #faf446;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.map-header__icon{
+    height: 100px;
+}
+
+.map-title{
+    align-self: start;
+    color: #FFFFFF;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+/*----------------*/
+
+.map-container{
+    height:95vh;
+    max-height: 700px;
+    max-width: 1200px;
+
+    width:95vw;
+}
+
+.map-logout{
+    width: 120px;
+}
+
+.map-logout__button{
+    align-items: center;
+    background-color: #272727;
+    border: 1px solid #272727;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    gap: 10px;
+    letter-spacing: 0.2px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.map-logout_icon{
+    height: 30px;
+}
+
+.map-legend-container{
+    align-self: center;
+    padding:15px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 320px;
+}
+
+.map-legend-item{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-direction: row;
+    line-height:25px;
+}
+
+.map-legend-item-rect{
+    height: 25px;
+    width: 25px;
+    border: none;
+    border-radius: 5px;
+}
+
+.map-legend-item-text{
+    width: 200px;
+}
+
+@media screen and (max-width: 480px) {
+
+    .map-page-container{
+        align-items: center;
+        gap: 10px;
+        flex-direction: column;
+        height: 100vh;
+        width: 100vw;
+        margin-left: unset;
+        margin-bottom: 30px;
+    }
+
+    .main-map-section{
+        gap: 10px;
+        margin: auto;
+    }
+
+    .map-title{
+        align-self: start;
+        color: #FFFFFF;
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+    }
+
+    .map-logout {
+        width: 110px;
+    }
+
+    .map-logout__button{
+        font-size: 14px;
+        gap: 7px;
+        padding: 5px 15px;
+    }
+
+    .map-logout_icon{
+        height: 20px;
+    }
+
+    .map-legend-container{
+        padding:10px;
+        gap: 15px;
+        width: unset;
+    }
+
+    .map-legend-item{
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        line-height:17px;
+    }
+
+    .map-legend-item-rect{
+        height: 20px;
+        width: 20px;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .map-legend-item-text{
+        font-size: 14px;
+    }
+}
+
+@media screen and (min-width: 480px) and (max-width: 800px) {
+    .map-page-container{
+        align-items: center;
+        gap: 10px;
+        flex-direction: column;
+        height: 100vh;
+        width: 100vw;
+        margin: auto auto 50px auto;
+    }
+
+    .main-map-section{
+        gap: 10px;
+        margin: auto;
+    }
+
+    .map-title{
+        align-self: start;
+        color: #FFFFFF;
+        font-size: 26px;
+        letter-spacing: 0.2px;
+    }
+
+    .map-logout__button{
+        font-size: 14px;
+        gap: 10px;
+        padding: 5px 15px;
+    }
+
+    .map-logout_icon{
+        height: 25px;
+    }
+
+    .map-legend-container{
+        justify-content: center;
+        padding:10px;
+        gap: 15px;
+        width: unset;
+    }
+
+    .map-legend-item{
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        line-height:17px;
+    }
+
+    .map-legend-item-rect{
+        height: 20px;
+        width: 20px;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .map-legend-item-text{
+        font-size: 14px;
+    }
+}
+
+@media screen and (min-width: 800px) and (max-width: 1200px) {
+
+    .map-title {
+        color: #FFFFFF;
+        font-size: 26px;
+    }
+    .map-legend-container{
+        justify-content: center;
+        padding:10px;
+        gap: 10px;
+        width: unset;
+        flex-direction: column;
+    }
+
+    .map-legend-item{
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        line-height:17px;
+    }
+
+    .map-legend-item-rect{
+        height: 15px;
+        width: 15px;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .map-legend-item-text{
+        font-size: 14px;
+    }
+
+    .map-logout {
+        width: 95px;
+    }
+
+    .map-logout__button{
+        font-size: 14px;
+        gap: 7px;
+        padding: 5px 15px;
+    }
+
+    .map-logout_icon{
+        height: 20px;
+    }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1439px) {
+
+    .map-page-container{
+        align-items: center;
+        gap: 10px;
+        height: 100vh;
+        width: 85vw;
+        margin: auto auto 50px auto;
+        flex-direction: column;
+    }
+
+    .main-map-section{
+        gap: 10px;
+        margin: auto;
+    }
+
+    .map-title{
+        align-self: start;
+        color: #FFFFFF;
+        font-size: 26px;
+        letter-spacing: 0.2px;
+    }
+
+    .map-logout__button{
+        font-size: 14px;
+        gap: 10px;
+        padding: 5px 15px;
+    }
+
+    .map-logout_icon{
+        height: 25px;
+    }
+
+    .map-legend-container{
+        justify-content: center;
+        padding:10px;
+        gap: 15px;
+        width: unset;
+
+    }
+
+    .map-legend-item{
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        line-height:17px;
+    }
+
+    .map-legend-item-rect{
+        height: 20px;
+        width: 20px;
+        border: none;
+        border-radius: 5px;
+    }
+
+    .map-legend-item-text{
+        font-size: 14px;
+    }
+}

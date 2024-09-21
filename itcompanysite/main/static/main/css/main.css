@@ -1,0 +1,639 @@
+body{
+    background-color: #272727;
+    display: flex;
+    flex-direction: column;
+    cursor: default;
+    font-family: Gilroy;
+    min-height: 100vh;
+    max-width: 1440px;
+    margin: auto;
+}
+
+ul{
+    list-style: none;
+}
+
+h1{
+    align-self: center;
+    color: #FFFFFF;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 35px;
+    letter-spacing: 0.2px;
+    padding: 0 15px;
+}
+
+h2{
+    color: #FFFFFF;
+    font-size: 26px;
+}
+
+h5{
+    align-self: center;
+    color: #FFFFFF;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0.7px;
+}
+
+a{
+    cursor:pointer;
+}
+
+.navigation-elem-link:hover{
+    transition-duration: 0.15s;
+    transform: scale(1.1);
+    backface-visibility: hidden;
+    transform-origin: center;
+}
+
+.hidden{
+    display: none;
+}
+
+.main-header{
+    height:57px;
+    align-items: center;
+    display: flex;
+    gap:15px;
+    justify-content: space-between;
+    margin: 0 0 30px 0;
+    padding: 10px 15px;
+}
+
+/*--logo--*/
+
+.main-logo{
+    display: block;
+    height: auto;
+    max-height: 50px;
+    padding-left: 10px;
+    width: auto;
+}
+
+.site-logo-container{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+    justify-content: center;
+}
+
+.site-logo__href{
+    text-decoration: none;
+}
+
+.IIT-logo{
+    display: inline-flex;
+    background-color: #faf446;
+    color: #272727;
+    font-family: Ultra;
+    font-size: 40px;
+    padding: 0 5px;
+}
+
+/*----------*/
+
+.search-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-right: auto;
+    margin-left: auto;I
+}
+
+.search-container{
+    align-items: center;
+    display: flex;
+
+}
+
+.search-row{
+    background-color: #302D2D;
+    border: solid 1px #faf446;
+    border-radius: 5px 0 0 5px;
+    color: #FFFFFF;
+    font-size: 12px;
+    padding: 10px;
+    height:30px;
+    width:500px;
+    letter-spacing: 0.2px;
+}
+
+.search-button{
+    align-items: center;
+    background-color: #faf446;
+    border: 1px solid #faf446;
+    border-radius: 0 5px 5px 0;
+    display: flex;
+    height:30px;
+    justify-content: center;
+    width:38px;
+}
+
+.search-button-image{
+    height:20px;
+    width:20px;
+}
+
+.search-button-image:hover{
+    cursor: pointer;
+}
+
+
+.navigation-elem{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.navigation-elem-link{
+    align-items: center;
+    color:  #faf446;
+    display: flex;
+    font-size: 14px;
+    gap: 5px;
+    justify-content: center;
+    text-decoration: none;
+    letter-spacing: 0.2px;
+}
+
+.navigation-elem-icon{
+    height: 24px;
+    width: 24px;
+}
+
+/*--map--*/
+
+.main-page-map-container{
+    height: 500px;
+    width: 85vw;
+    max-width: 1240px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/*---------greeting----------*/
+
+.section-greeting{
+    background: linear-gradient(270deg, #000 0%, #000 0.14%, rgba(0, 0, 0, 0.00) 40%), url("../../main/img/compik.png");
+    border-radius: 20px;
+    color: #FFFFFF;
+    height: 500px;
+    letter-spacing: 0.2px;
+    margin: auto;
+    padding: 70px 20px;
+    text-align: center;
+    width: 1200px;
+}
+
+.section-greeting__description{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 500px;
+}
+
+.section-greeting__headline{
+    font-size: 76px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.section-greeting__sub-headline{
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+
+.menu-wrap{
+     display: none;
+
+}
+
+
+.footer{
+    border-top: solid 1px #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    width: 100%;
+}
+
+hr{
+    width: 100%;
+    border: 0.5px solid #FFFFFF;
+}
+
+.footer-content{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    justify-content: center;
+    padding: 15px 0 20px;
+}
+
+.footer-content__text{
+    color: #faf446;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    text-align: center
+}
+
+
+@media screen and (max-width: 480px) {
+
+    .site-logo-container {
+        gap: 0;
+    }
+
+    .main-logo{
+        width: 40px;
+    }
+
+    .main-header{
+        background-color: #272727;
+        gap: unset;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        z-index: 2501;
+        padding: 10px 0;
+    }
+
+    .search-row{
+        font-size: 12px;
+        height:30px;
+        width:190px;
+    }
+
+    .search-button{
+        height:30px;
+        width:30px;
+    }
+
+    .navigation-elem{
+        display: none;
+    }
+
+    .menu-wrap{
+        display: block;
+        align-self: center;
+    }
+
+    nav input{
+        display: none;
+    }
+
+    nav label{
+        display: block;
+        padding-right: 10px;
+    }
+
+    .menu li{
+        float: none;
+    }
+
+    .menu{
+        display: none;
+    }
+
+    #menu-toggle:checked + .menu{
+        align-items: center;
+        background-color: #272727;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        left: 0;
+        position: absolute;
+        padding: 10px;
+    }
+
+    .menu-icon{
+        height: 30px;
+    }
+
+    /*---------greeting----------*/
+
+    .section-greeting{
+        background: linear-gradient(90deg, #000 0%, #000 0.14%, rgba(0, 0, 0, 0.00) 40%), linear-gradient(270deg, #000 0%, #000 0.14%, rgba(0, 0, 0, 0.00) 40%), url("../../main/img/compik.png");
+        height: 100px;
+        margin: 70px auto auto auto;
+        text-align: center;
+        width: 300px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    .section-greeting__description{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        width: 300px;
+    }
+
+    .section-greeting__headline{
+        font-size: 26px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .section-greeting__sub-headline{
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+
+    .section-subtitle {
+        padding: 10px;
+    }
+
+    .main-page-map-container {
+        height: 400px;
+    }
+
+    .footer-content{
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        justify-content: center;
+        padding: 20px;
+    }
+}
+
+@media screen and (min-width: 480px) and (max-width: 800px) {
+
+    .main-page-map-container {
+        height: 500px;
+        width: 85vw;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .site-logo-container {
+        gap: 0;
+    }
+
+
+    .main-logo{
+        width: 40px;
+    }
+
+    .main-header{
+        background-color: #272727;
+        gap: unset;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        z-index: 2501;
+        padding: 10px 0;
+    }
+
+    .search-row{
+        font-size: 12px;
+        height:30px;
+        width:290px;
+    }
+
+    .search-button{
+        height:30px;
+        width:30px;
+    }
+
+    .search-button-image{
+        height:20px;
+        width:20px;
+    }
+
+    .navigation-elem{
+        display: none;
+    }
+
+    .menu-wrap{
+        display: block;
+        align-self: center;
+    }
+
+    nav input{
+        display: none;
+    }
+
+    nav label{
+        display: block;
+        padding-right: 10px;
+    }
+
+    .menu li{
+        float: none;
+    }
+
+    .menu{
+        display: none;
+    }
+
+    #menu-toggle:checked + .menu{
+        align-items: center;
+        background-color: #272727;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        left: 0;
+        position: absolute;
+        padding: 10px;
+    }
+
+    .menu-icon{
+        height: 30px;
+    }
+
+    /*---------greeting----------*/
+
+    .section-greeting{
+        background: linear-gradient(90deg, #000 0%, #000 0.14%, rgba(0, 0, 0, 0.00) 40%), linear-gradient(270deg, #000 0%, #000 0.14%, rgba(0, 0, 0, 0.00) 40%), url("../../main/img/compik.png");
+        border-radius: 20px;
+        height: 100px;
+        margin: 70px auto auto auto;
+        padding: 70px 20px;
+        text-align: center;
+        width: 430px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .section-greeting__description{
+        margin: auto;
+        gap: 20px;
+        width: 300px;
+        justify-content: center;
+    }
+
+    .section-greeting__headline{
+        font-size: 26px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .section-greeting__sub-headline{
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .section-subtitle {
+        padding: 10px;
+    }
+
+    .footer-content{
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        justify-content: center;
+        padding: 30px;
+    }
+}
+
+@media screen and (min-width: 800px) and (max-width:1199px){
+
+    .main-logo{
+        width: 55px;
+    }
+
+    .search-row{
+        font-size: 12px;
+        height:30px;
+        width:400px;
+    }
+
+    .search-button{
+        width:30px;
+    }
+
+    .main-header{
+        background-color: #272727;
+        gap: unset;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding-bottom: 10px;
+        z-index: 2501;
+        box-sizing: border-box;
+    }
+
+    .navigation-elem{
+        display: none;
+    }
+
+    .menu-wrap{
+        display: block;
+        align-self: center;
+    }
+
+    nav input{
+        display: none;
+    }
+
+    nav label{
+        display: block;
+        padding-right: 10px;
+    }
+
+    .menu li{
+        float: none;
+    }
+
+    .menu{
+        display: none;
+    }
+
+    #menu-toggle:checked + .menu{
+        align-items: center;
+        background-color: #272727;
+        box-sizing: border-box;
+        width: 100%;
+        left: 0;
+        position: absolute;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 15px;
+        padding: 15px 0;
+    }
+
+    .menu-icon{
+        height: 30px;
+    }
+
+    .navigation-elem-link{
+        height: 30px;
+        font-size: 18px;
+    }
+
+    .navigation-elem-icon{
+        height: 28px;
+        width: 28px;
+    }
+
+    .section-greeting{
+        background: linear-gradient(90deg, #000 0%, #000 0.14%, rgba(0, 0, 0, 0.00) 40%), linear-gradient(270deg, #000 0%, #000 0.14%, rgba(0, 0, 0, 0.00) 40%), url("../../main/img/compik.png");
+        height: 300px;
+        margin: auto;
+        text-align: center;
+        width: 700px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        margin-top: 80px;
+
+    }
+
+    .section-greeting__description{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin: auto;
+    }
+
+    .section-greeting__headline{
+        font-size: 54px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .section-greeting__sub-headline{
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1439px) {
+
+    .section-greeting{
+        width: 1100px;
+    }
+
+}
+
+

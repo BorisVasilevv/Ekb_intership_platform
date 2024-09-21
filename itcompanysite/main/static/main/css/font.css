@@ -1,0 +1,20 @@
+@font-face {
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/Gilroy-Light.otf");
+}
+
+@font-face {
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 700;
+    src: url("../fonts/Gilroy-Regular.ttf");
+}
+
+@font-face {
+    font-family: Ultra;
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/Ultra-Regular.ttf");
+}

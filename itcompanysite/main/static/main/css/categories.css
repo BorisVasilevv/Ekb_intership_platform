@@ -1,0 +1,233 @@
+
+.section{
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 50px 50px 10px 50px;
+}
+
+.section-categories{
+    margin: 50px 50px 100px 50px;
+}
+
+.categories-container{
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    padding: 10px;
+}
+
+.main-category{
+    align-items: flex-start;
+    border: 2px solid;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 30px;
+}
+
+.main-category_header{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.main-category_header-upper{
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+}
+
+.main-category_header-title{
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+}
+
+.main-category_subcategories{
+    align-items: flex-start;
+    border-top: 1px solid #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 35px;
+    padding: 30px 0;
+    width: 100%;
+}
+
+.categories-item{
+    border: 2px solid;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+    width: 300px;
+    letter-spacing: 0.2px;
+}
+
+.categories-item_description{
+     line-height: 1.2;
+}
+
+.section-title{
+    font-size: 36px;
+    font-weight: 700;
+    letter-space: 0.2px;
+    padding-left: 5px;
+}
+
+.section-subtitle{
+    border-top: 1px ysolid #FFFFFF;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    line-height: 1.2;
+    padding: 10px;
+}
+
+.categories-item_title{
+    font-size: 18px;
+    font-weight: 400;
+    height: 36px;
+    letter-spacing: 0.2px;
+}
+
+.categories-item_button{
+    align-self: flex-start;
+    background-color: #272727;
+    border: 1px solid #FFFFFF;
+    border-radius: 10px;
+    color: #FFFFFF;
+    line-height: 21px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.categories-item_button:hover{
+    background-color: #ffffff0f;
+}
+
+.categories-item_summary{
+    margin-bottom: 10px;
+}
+
+.categories-item_summary:hover{
+    cursor: pointer;
+}
+
+/*-----------------------------------------------*/
+
+@media screen and (max-width: 480px) {
+
+    .section{
+        margin: 25px 25px 75px 25px;
+        gap: 20px;
+    }
+
+    .section-category{
+        margin: 70px 15px 20px 15px;
+    }
+
+    .section-title {
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    .categories-container {
+        gap: 30px;
+        padding: 0;
+    }
+
+    .main-category {
+        align-items: unset;
+        padding: 20px;
+    }
+
+    .main-category_header-title {
+        font-size: 26px;
+    }
+
+    .main-category_header-upper {
+        justify-content: space-between;
+        gap: 5px;
+    }
+
+    .categories-item_button {
+        border-radius: 10px;
+        line-height: 21px;
+        padding: 5px 7px;
+        cursor: pointer;
+    }
+}
+
+@media screen and (min-width: 480px) and (max-width: 800px){
+
+    .section{
+        margin: 25px 25px 75px 25px;
+        gap: 20px;
+    }
+
+    .section-category{
+        margin: 70px 15px 20px 15px;
+    }
+
+    .section-title {
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    .categories-container {
+        gap: 30px;
+        padding: 0;
+    }
+
+    .main-category {
+        align-items: unset;
+        padding: 20px;
+    }
+
+    .main-category_header-title {
+        font-size: 26px;
+    }
+
+    .main-category_header-upper {
+        justify-content: space-between;
+    }
+
+    .categories-item_button {
+        border-radius: 10px;
+        line-height: 21px;
+        padding: 5px 7px;
+        cursor: pointer;
+    }
+}
+
+@media screen and (min-width: 800px) and (max-width:1199px){
+    .categories-item{
+        width: 250px;
+    }
+
+    .section-category{
+        margin: 80px 15px 20px 15px;
+    }
+
+}
+
+@media screen and (min-width: 1200px) and (max-width:1439px){
+
+    .section-category{
+        margin: 10px 50px 20px 50px;
+    }
+}
+
+@media screen and (min-width: 1400px){
+
+    .section-category{
+        margin: 10px 50px 20px 50px;
+    }
+}
