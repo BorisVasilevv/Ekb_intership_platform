@@ -34,12 +34,12 @@ def map(request):
     # city = City.objects.get(id=1)
     # result_companies = companies_to_companies_with_address(companies)
 
-    # context = {
-    #     "subcategories": subcategories,
-    #     "city": city,
-    #     "companies_with_address": result_companies
-    # }
-    # return render(request, 'main/map.html', context=context)
+    context = {
+        "subcategories": subcategories,
+        # "city": city,
+        "companies_with_address": companies
+    }
+    return render(request, 'main/map.html', context=context)
 
 def companies_to_companies_with_address(companies):
     result_companies = []
