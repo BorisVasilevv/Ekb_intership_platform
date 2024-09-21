@@ -8,7 +8,11 @@ urlpatterns = [
 
     path('', include('django.contrib.auth.urls')),
     path('registration/', views.registration, name='registration'),
+    path('registration/student', views.registration, name='student_reg'),
+    path('registration/company', views.registration, name='company_reg'),
+    path('registration/ed_institution', views.registration, name='ed_institution'),
     path('profile/', views.profile, name='profile'),
+
     path(
         'invalid_verify/',
         TemplateView.as_view(template_name='accounts/invalid_verify.html'),

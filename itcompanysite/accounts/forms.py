@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from .utils import send_email_for_verify
 
 User = get_user_model()
-class MyUserCreationForm(UserCreationForm):
+class StudentCreationForm(UserCreationForm):
 
     """Method which let username be not unique"""
     def clean_username(self):
@@ -20,11 +20,60 @@ class MyUserCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ("username", "email")
+        fields = ("username", "email", "role")
 
         # if only email
         # fields = ("email",)
 
+class EducationCreationForm(UserCreationForm):
+
+    """Method which let username be not unique"""
+    def clean_username(self):
+        return self.cleaned_data.get("username")
+
+    phone = forms.CharField(
+        label=_("Телефон"),
+        max_length=20,
+        widget=forms.TextInput(attrs={"autocomplete": "phone"}),
+    )
+    location = forms.CharField(
+        label=_("Местоположение"),
+        max_length=255,
+        widget=forms.TextInput(attrs={"autocomplete": "location"}),
+    )
+    company_name = forms.CharField(
+        label=_("Название образовательного учреждения"),
+        max_length=255,
+        widget=forms.TextInput(attrs={"autocomplete": "company_name"}),
+    )
+    
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ("username", "email", "phone", "location", "company_name", "role")
+
+class CompanyCreationForm(UserCreationForm):
+    def clean_username(self):
+        return self.cleaned_data.get("username")
+
+    phone = forms.CharField(
+        label=_("Телефон"),
+        max_length=20,
+        widget=forms.TextInput(attrs={"autocomplete": "phone"}),
+    )
+    location = forms.CharField(
+        label=_("Местоположение"),
+        max_length=255,
+        widget=forms.TextInput(attrs={"autocomplete": "location"}),
+    )
+    company_name = forms.CharField(
+        label=_("Название компании"),
+        max_length=255,
+        widget=forms.TextInput(attrs={"autocomplete": "company_name"}),
+    )
+    
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ("username", "email", "phone", "location", "company_name", "role")
 
 class MyAuthenticationForm(AuthenticationForm):
     def clean(self):
