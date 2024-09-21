@@ -20,22 +20,26 @@
         <span class="registration-header_main"> Регистрация </span>
     </div>
 
-    {% for i in roles %}
-            {{i}}
-    {% endfor %}
 
-
-
-    <form method="post" class="registration-form">
-        {% csrf_token %}
-        {% for f in user_form %}
-            {{ f|add_label_class:"registration-help-info"}} <!-- another way <label for="{{f.id_for_label}}" class="registration-help-info">{{f.label}}</label>-->
-            {%render_field f class+="input-field"%} <!-- don't know another way-->
-            {{f.errors}}
+    <div class="registration_user-type-header">
+        {% for i in roles %}
+            <form method="get" action="{%url 'student_reg'%}?role='{{i}}'">
+                <button class="login-button extra-button user-button" type="submit"> {{i}} </button>
+            </form>
         {% endfor %}
+    </div>
 
-        <button class="submit-button" type="submit">Подтвердить</button>
-    </form>
+
+{#    <form method="post" class="registration-form">#}
+{#        {% csrf_token %}#}
+{#        {% for f in user_form %}#}
+{#            {{ f|add_label_class:"registration-help-info"}} <!-- another way <label for="{{f.id_for_label}}" class="registration-help-info">{{f.label}}</label>-->#}
+{#            {%render_field f class+="input-field"%} <!-- don't know another way-->#}
+{#            {{f.errors}}#}
+{#        {% endfor %}#}
+{##}
+{#        <button class="submit-button" type="submit">Подтвердить</button>#}
+{#    </form>#}
 
 </main>
 {% endblock %}
