@@ -3,6 +3,8 @@
 
 {% block head %}
 <link rel="shortcut icon" href="{% static 'main/icons/home.svg'%}" />
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<link rel="stylesheet" href="{% static 'main/news_slider.css' %}" />
 <script src="https://api-maps.yandex.ru/2.1/?apikey=d5ab5e3a-1ac2-4343-a58f-b97c6da034b9&lang=ru_RU" type="text/javascript"></script>
 {% endblock %}
 {%block title%}Главная страница{%endblock%}
@@ -15,6 +17,29 @@
             <span class="section-greeting__sub-headline">Мы собрали информацию о компаниях Челябинска, чтобы помочь вам окунуться в мир IT</span>
         </div>
 
+    </section>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <section class="section-news">
+        <span class="section-title">Новости</span>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                {% for news in latest_news %}
+                <div class="swiper-slide">
+                    <a href="{{ news.url }}">
+                        <img src="{{ news.image.url }}" alt="{{ news.title }}">
+                        <h3>{{ news.title }}</h3>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
     </section>
 
     <section class="section section-map">
@@ -61,6 +86,25 @@
             {% endfor %}
         </div>
     </section>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
 
 <script>
     ymaps.ready(init);
