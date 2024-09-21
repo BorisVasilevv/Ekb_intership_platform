@@ -1,6 +1,8 @@
+import uuid as uuid
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+import django.utils.timezone
 
 
 class User(AbstractUser):
@@ -41,3 +43,25 @@ class User(AbstractUser):
 
     def is_educational_institution(self):
         return self.role == 'educational_institution'
+
+class File(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE,  default='')
+    document_text = models.FileField('document_text', upload_to='files/' + str(uuid.uuid4()))
+    created_at = models.DateTimeField('created_at', default=django.utils.timezone.now)
+    document_name = models.TextField('document_name', default='file' + str(uuid.uuid4()))
+
+    class Meta:
+        verbose_name = 'Резюме'
+        verbose_name_plural = 'Резюме'
+
+class UserFiles(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default='')
+    file = models.ForeignKey(File, on_delete=models.CASCADE, default='')
+
+
+
+
+
+
+
+

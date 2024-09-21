@@ -2,7 +2,7 @@ from django.db import models
 from .namehelper import CompanyName
 from django.contrib.auth import get_user_model
 from .utils import geocoder
-
+from accounts.models import File
 
 User = get_user_model()
 
@@ -60,30 +60,6 @@ class Subcategory(models.Model):
     def __str__(self):
         return self.subcategory_name
 
-    # def save(self, *args, **kwargs):
-    #     # match self.subcategory_name:
-    #     #     case CompanyName.CONST_SELF_PRODUCT:
-    #     #         self.style_name = 'self_product'
-    #     #     case CompanyName.CONST_STARTUP:
-    #     #         self.style_name = 'startup'
-    #     #     case CompanyName.CONST_PROJECT_SUPPORT:
-    #     #         self.style_name = 'project_support'
-    #     #
-    #     #     case CompanyName.CONST_CUSTOM_DEV:
-    #     #         self.style_name = 'custom_dev'
-    #     #     case CompanyName.CONST_WEB_STUDIO:
-    #     #         self.style_name = 'web_studio'
-    #     #     case CompanyName.CONST_IT_COMPANY:
-    #     #         self.style_name = 'big_it_company'
-    #     #     case CompanyName.CONST_B2G:
-    #     #         self.style_name = 'b2g'
-    #     #
-    #     #     case CompanyName.CONST_GAME_DEV:
-    #     #         self.style_name = 'game_dev'
-    #     #     case CompanyName.CONST_NONE_TYPE:
-    #     #         self.style_name = 'none_type'
-    #     super(Subcategory, self).save(*args, **kwargs)
-
     class Meta:
         verbose_name = 'CompanySubcategory'
         verbose_name_plural = 'CompanySubcategories'
@@ -94,10 +70,7 @@ class Company(models.Model):
     logotype = models.ImageField('logotype', upload_to='companies/logo/img')
     short_description = models.TextField('short_description')
     url = models.CharField('url', max_length=200)
-    accreditation = models.BooleanField('accreditation')
     phone = models.CharField('phone', max_length=200, null=True, blank=True)
-    telegram = models.CharField('telegram', max_length=200, null=True, blank=True)
-    email = models.CharField('email', max_length=200, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -130,6 +103,7 @@ class Favorite(models.Model):
     def __str__(self):
         return "%s добавил в избранное %s" % (self.user, self.company)
 
+
 class City(models.Model):
     name = models.CharField('name', max_length=150)
     coordinate_x = models.FloatField()
@@ -139,8 +113,9 @@ class City(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'City'
-        verbose_name_plural = 'Cities'
+        verbose_name = 'Город'
+        verbose_name_plural = 'Города'
+
 
 class Address(models.Model):
     city = models.ForeignKey(City, on_delete=models.DO_NOTHING, default='')
@@ -153,8 +128,8 @@ class Address(models.Model):
         return "%s %s %s" % (self.city, self.street, self.home_number)
 
     class Meta:
-        verbose_name = 'Address'
-        verbose_name_plural = 'Addresses'
+        verbose_name = 'Адрес'
+        verbose_name_plural = 'Адреса'
 
     def save(self, *args, **kwargs):
         if not self.coordinate_x or not self.coordinate_y:
@@ -166,6 +141,7 @@ class Address(models.Model):
 
         super().save(*args, **kwargs)
 
+
 class CompanyAddress(models.Model):
     company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, default='')
     address = models.ForeignKey(Address, on_delete=models.DO_NOTHING, default='')
@@ -174,25 +150,28 @@ class CompanyAddress(models.Model):
         return "%s располагается по адресу %s" % (self.company, self.address)
 
     class Meta:
-        verbose_name = 'CompanyAddress'
-        verbose_name_plural = 'CompanyAddresses'
+        verbose_name = 'Адрес компании'
+        verbose_name_plural = 'Адреса компаний'
 
-class Internship(models.Model):
-
-    all_places = models.IntegerField('all_places')
-    available_places = models.IntegerField('available_places')
-    time_type_work = models.TextField('time_type_work')
-    date_start = models.DateField('date_start')
-    date_end = models.DateField('date_end')
-    description = models.TextField('description', default="")
-    company = models.ForeignKey(Company, on_delete=models.DO_NOTHING,  default='')
-    company_address = models.ForeignKey(CompanyAddress, on_delete=models.DO_NOTHING, default='')
-
-def __str__(self):
-    return self.subcategory_name
+class Specialization(models.Model):
+    specialization_name = models.TextField('specialization_name')
 
     class Meta:
-        verbose_name = 'Intership'
-        verbose_name_plural = 'Interships'
+        verbose_name = 'Специализация'
+        verbose_name_plural = 'Специализации'
 
+class InternshipSpecialization(models.Model):
+    specialization = models.ForeignKey(Specialization, on_delete=models.DO_NOTHING,  default='')
+    company_address = models.ForeignKey(CompanyAddress, on_delete=models.DO_NOTHING, blank=True, null=True, default='')
 
+    class Meta:
+        verbose_name = 'Специализация у стажировки'
+        verbose_name_plural = 'Специализации стажировок'
+
+class CompanyFiles(models.Model):
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, default='')
+    file = models.ForeignKey(File, on_delete=models.CASCADE, default='')
+
+class CompanyUser(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)

@@ -1,8 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, NewsForm
 from companies.models import Category, Subcategory, Company, City, Address, CompanyAddress, CompanyCategory, City
 from .helpstructure import CategoryWithSubcategories, CompanyWithAddress
+from .models import News
+
+
+def create_news(request):
+    if request.method == 'POST':
+        form = NewsForm(request.POST, request.FILES)  # Принимаем данные формы и файлы
+        if form.is_valid():
+            form.save()  # Сохраняем новость в базе данных
+            return redirect('home')  # Перенаправляем на главную после успешного сохранения
+    else:
+        form = NewsForm()  # Пустая форма для GET-запроса
+    return render(request, 'main/create_news.html', {'form': form})
+
 
 def index(request):
     categories = Category.objects.all()
@@ -16,16 +29,17 @@ def index(request):
         categories_with_subcategories.append(categor)
 
     companies = Company.objects.all()
-    # Достаём город пользователя по его геолокации
-    # city = City.objects.get(id=1)
-    # result_companies = companies_to_companies_with_address(companies)
+
+    # Получаем последние 5 новостей
+    latest_news = News.objects.all().order_by('-created_at')[:5]
 
     context = {
         "categories": categories_with_subcategories,
-        # "city": city,
-        "companies_with_address": companies
+        "companies_with_address": companies,
+        "latest_news": latest_news  # Передаём новости в контекст
     }
     return render(request, 'main/index.html', context=context)
+
 
 def map(request):
     subcategories = Subcategory.objects.all()
@@ -40,6 +54,7 @@ def map(request):
         "companies_with_address": companies
     }
     return render(request, 'main/map.html', context=context)
+
 
 def companies_to_companies_with_address(companies):
     result_companies = []
