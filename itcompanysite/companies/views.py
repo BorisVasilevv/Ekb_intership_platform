@@ -9,10 +9,12 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from .helpstructure import CompanyFullData
 from .utils import has_russian_letters
+from accounts.utils import role_required
 
 
 # Create your views here.
 
+@role_required('student')
 def companies(request):
     all_companies = Company.objects.all()
     result_companies = get_companies_with_full_data(request.user, all_companies)
