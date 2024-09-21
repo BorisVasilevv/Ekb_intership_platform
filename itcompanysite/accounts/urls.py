@@ -14,6 +14,11 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
 
     path(
+        'i/',
+        TemplateView.as_view(template_name='accounts/invalid_verify.html'),
+        name='invalid_verify'
+    ),
+    path(
         'invalid_verify/',
         TemplateView.as_view(template_name='accounts/invalid_verify.html'),
         name='invalid_verify'
