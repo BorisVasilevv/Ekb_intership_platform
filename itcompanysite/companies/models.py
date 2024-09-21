@@ -6,6 +6,7 @@ from .utils import geocoder
 
 User = get_user_model()
 
+
 class Category(models.Model):
     CATEGORY_NAME = (
         (CompanyName.CONST_SELF_PRODUCT, CompanyName.CONST_SELF_PRODUCT),
@@ -130,6 +131,7 @@ class Favorite(models.Model):
     def __str__(self):
         return "%s добавил в избранное %s" % (self.user, self.company)
 
+
 class City(models.Model):
     name = models.CharField('name', max_length=150)
     coordinate_x = models.FloatField()
@@ -141,6 +143,7 @@ class City(models.Model):
     class Meta:
         verbose_name = 'City'
         verbose_name_plural = 'Cities'
+
 
 class Address(models.Model):
     city = models.ForeignKey(City, on_delete=models.DO_NOTHING, default='')
@@ -166,6 +169,7 @@ class Address(models.Model):
 
         super().save(*args, **kwargs)
 
+
 class CompanyAddress(models.Model):
     company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, default='')
     address = models.ForeignKey(Address, on_delete=models.DO_NOTHING, default='')
@@ -177,16 +181,6 @@ class CompanyAddress(models.Model):
         verbose_name = 'CompanyAddress'
         verbose_name_plural = 'CompanyAddresses'
 
-class Internship(models.Model):
-
-    all_places = models.IntegerField('all_places')
-    available_places = models.IntegerField('available_places')
-    time_type_work = models.TextField('time_type_work')
-    date_start = models.DateField('date_start')
-    date_end = models.DateField('date_end')
-    description = models.TextField('description', default="")
-    company = models.ForeignKey(Company, on_delete=models.DO_NOTHING,  default='')
-    company_address = models.ForeignKey(CompanyAddress, on_delete=models.DO_NOTHING, default='')
 
 def __str__(self):
     return self.subcategory_name
