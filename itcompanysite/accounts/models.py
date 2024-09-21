@@ -53,5 +53,12 @@ class File(models.Model):
         verbose_name = 'Резюме'
         verbose_name_plural = 'Резюме'
 
+
 class StudentResponse(models.Model):
+    StudentResponseFiles = models.ForeignKey(User, on_delete=models.CASCADE,  default='')
+    internship = models.ForeignKey(Internship)
+
+
+
+
 
