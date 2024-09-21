@@ -20,6 +20,16 @@
         <span class="registration-header_main"> Регистрация </span>
     </div>
 
+    <div class="registration_user-type-header">
+        <form method="get" action="{%url 'student_reg'%}?role='student'">
+            <button class="login-button extra-button user-button" type="submit"> Студент </button>
+        </form>
+        <span class="registration-header_main registration-user_type"> Компания </span>
+        <form method="get" action="{%url 'ed_institution'%}?role='educational_institution'">
+            <button class="login-button extra-button user-button" type="submit">Учебное заведение</button>
+        </form>
+    </div>
+
     {% for i in roles %}
             {{i}}
     {% endfor %}
