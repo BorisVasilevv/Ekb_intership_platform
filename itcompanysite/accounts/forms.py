@@ -4,6 +4,9 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from .utils import send_email_for_verify
+from companies.models import Company, City, Address, CompanyAddress, CompanyUser
+
+from companies.utils import geocoder
 
 User = get_user_model()
 class StudentCreationForm(UserCreationForm):
@@ -51,17 +54,15 @@ class EducationCreationForm(UserCreationForm):
         model = User
         fields = ("username", "email", "phone", "location", "company_name", "role")
 
-class CompanyCreationForm(UserCreationForm):
-    def clean_username(self):
-        return self.cleaned_data.get("username")
 
+class CompanyCreationForm(UserCreationForm):
     phone = forms.CharField(
         label=_("Телефон"),
         max_length=20,
         widget=forms.TextInput(attrs={"autocomplete": "phone"}),
     )
     location = forms.CharField(
-        label=_("Местоположение"),
+        label=_("Местоположение (город, улица, номер дома)"),
         max_length=255,
         widget=forms.TextInput(attrs={"autocomplete": "location"}),
     )
@@ -70,10 +71,46 @@ class CompanyCreationForm(UserCreationForm):
         max_length=255,
         widget=forms.TextInput(attrs={"autocomplete": "company_name"}),
     )
-    
+
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ("username", "email", "phone", "location", "company_name", "role")
+        fields = ("username", "email", "phone", "location", "company_name", "password1", "password2")
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if commit:
+            # Установите роль здесь
+            user.role = self.cleaned_data.get('role')
+            user.save()
+
+            # Создаем компанию
+            company = Company.objects.create(
+                name=self.cleaned_data.get('company_name'),
+                phone=self.cleaned_data.get('phone'),
+                short_description="Описание компании",  # Или динамически
+                url="https://example.com",  # Или получить из формы
+            )
+
+            # Создаем адрес на основе поля location
+            location_data = self.cleaned_data.get('location').split(', ')
+            city_name = location_data[0]
+            street_name = location_data[1] if len(location_data) > 1 else ""
+            house_number = location_data[2] if len(location_data) > 2 else ""
+
+            coordinates = geocoder(city_name)
+            city, _ = City.objects.get_or_create(name=city_name, coordinate_x=coordinates[0], coordinate_y=coordinates[1])
+            address = Address.objects.create(
+                city=city,
+                street=street_name,
+                home_number=house_number
+            )
+
+            # Связываем компанию с адресом
+            CompanyAddress.objects.create(company=company, address=address)
+
+            # Опционально связываем компанию с пользователем
+            CompanyUser.objects.create(user=user, company=company)
+        return user
 
 class MyAuthenticationForm(AuthenticationForm):
     def clean(self):

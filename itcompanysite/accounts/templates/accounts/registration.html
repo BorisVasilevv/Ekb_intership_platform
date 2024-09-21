@@ -25,9 +25,10 @@
         {% endfor %}
         
         <!-- Добавляем скрытое поле role -->
-        {% if user_form.role %}
-            {{ user_form.role.as_hidden }}
+        {% if role %}
+            <input type="hidden" name="role" value="{{ role }}">
         {% endif %}
+
         
         <button class="submit-button" type="submit">Подтвердить</button>
     </form>
