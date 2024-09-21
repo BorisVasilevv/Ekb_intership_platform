@@ -1,0 +1,31 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+    <link rel="shortcut icon" href="{% static 'main/icons/user.svg' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/registration.css' %}">
+{% endblock %}
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<main class="registration-container">
+    <div class="registration-header">
+        <form action="{% url 'login' %}">
+            <button class="login-button extra-button" type="submit">Вход</button>
+        </form>
+        <span class="registration-header_main">Регистрация</span>
+    </div>
+
+    <form method="post" action="{% url 'registration' %}">
+        {% csrf_token %}
+        <div class="role-buttons">
+            {% for role in roles %}
+                <button type="submit" name="role" value="{{ role }}" class="login-button extra-button user-button">
+                    {{ role }}
+                </button>
+            {% endfor %}
+        </div>
+    </form>
+</main>
+{% endblock %}

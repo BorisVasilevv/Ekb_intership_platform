@@ -8,7 +8,12 @@
 
 .registration-header{
     display: flex;
-    flex-direction: row
+    flex-direction: row;
+}
+
+.registration_user-type-header{
+    display: flex;
+    flex-direction: row;
 }
 
 .registration-header_main{
@@ -77,6 +82,14 @@
     text-decoration: none;
     padding: 15px ;
     cursor: pointer;
+}
+
+.user-button{
+    font-size: 20px;
+}
+
+.registration-user_type{
+    font-size: 20px;
 }
 
 .help{

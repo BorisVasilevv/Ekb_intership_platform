@@ -52,6 +52,16 @@
 
 }
 
+.section_title{
+    text-align: center;
+    border-bottom: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    font-size: 24px;
+    letter-spacing: 0.2px;
+    padding: 20px;
+    max-width: 300px;
+}
+
 /*----------------*/
 
 
@@ -81,6 +91,24 @@
 
 .profile-logout_icon{
     height: 30px;
+}
+
+.profile_section{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.add-item{
+    background-color: #272727;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 10px ;
+    cursor: pointer;
+    max-width: 300px;
 }
 
 h4{
