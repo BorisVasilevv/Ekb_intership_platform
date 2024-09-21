@@ -37,9 +37,9 @@
     <div class="profile_section practies">
         <span class="section_title">Практики</span>
         <div class="section_items practies_items"></div>
-        <button class="add-item add-practies">
-            <span>+ Добавить практику</span>
-        </button>
+        <a href="{% url 'create_internship' %}">
+            <button class="btn">Добавить практику</button>
+        </a>
     </div>
 
     <div class="profile_section requests">
