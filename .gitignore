@@ -11,5 +11,3 @@ itcompanysite/db.sqlite3
 
 
 *.png
-
-itcompanysite/accounts/migrations/
