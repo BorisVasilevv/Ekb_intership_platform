@@ -60,30 +60,6 @@ class Subcategory(models.Model):
     def __str__(self):
         return self.subcategory_name
 
-    # def save(self, *args, **kwargs):
-    #     # match self.subcategory_name:
-    #     #     case CompanyName.CONST_SELF_PRODUCT:
-    #     #         self.style_name = 'self_product'
-    #     #     case CompanyName.CONST_STARTUP:
-    #     #         self.style_name = 'startup'
-    #     #     case CompanyName.CONST_PROJECT_SUPPORT:
-    #     #         self.style_name = 'project_support'
-    #     #
-    #     #     case CompanyName.CONST_CUSTOM_DEV:
-    #     #         self.style_name = 'custom_dev'
-    #     #     case CompanyName.CONST_WEB_STUDIO:
-    #     #         self.style_name = 'web_studio'
-    #     #     case CompanyName.CONST_IT_COMPANY:
-    #     #         self.style_name = 'big_it_company'
-    #     #     case CompanyName.CONST_B2G:
-    #     #         self.style_name = 'b2g'
-    #     #
-    #     #     case CompanyName.CONST_GAME_DEV:
-    #     #         self.style_name = 'game_dev'
-    #     #     case CompanyName.CONST_NONE_TYPE:
-    #     #         self.style_name = 'none_type'
-    #     super(Subcategory, self).save(*args, **kwargs)
-
     class Meta:
         verbose_name = 'CompanySubcategory'
         verbose_name_plural = 'CompanySubcategories'
@@ -139,8 +115,8 @@ class City(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'City'
-        verbose_name_plural = 'Cities'
+        verbose_name = 'Город'
+        verbose_name_plural = 'Города'
 
 class Address(models.Model):
     city = models.ForeignKey(City, on_delete=models.DO_NOTHING, default='')
@@ -153,8 +129,8 @@ class Address(models.Model):
         return "%s %s %s" % (self.city, self.street, self.home_number)
 
     class Meta:
-        verbose_name = 'Address'
-        verbose_name_plural = 'Addresses'
+        verbose_name = 'Адрес'
+        verbose_name_plural = 'Адреса'
 
     def save(self, *args, **kwargs):
         if not self.coordinate_x or not self.coordinate_y:
@@ -174,11 +150,10 @@ class CompanyAddress(models.Model):
         return "%s располагается по адресу %s" % (self.company, self.address)
 
     class Meta:
-        verbose_name = 'CompanyAddress'
-        verbose_name_plural = 'CompanyAddresses'
+        verbose_name = 'Адрес компании'
+        verbose_name_plural = 'Адреса компаний'
 
 class Internship(models.Model):
-
     all_places = models.IntegerField('all_places')
     available_places = models.IntegerField('available_places')
     time_type_work = models.TextField('time_type_work')
@@ -186,13 +161,27 @@ class Internship(models.Model):
     date_end = models.DateField('date_end')
     description = models.TextField('description', default="")
     company = models.ForeignKey(Company, on_delete=models.DO_NOTHING,  default='')
-    company_address = models.ForeignKey(CompanyAddress, on_delete=models.DO_NOTHING, default='')
-
-def __str__(self):
-    return self.subcategory_name
+    company_address = models.ForeignKey(CompanyAddress, blank=True, null=True, on_delete=models.SET_NULL, default='')
 
     class Meta:
-        verbose_name = 'Intership'
-        verbose_name_plural = 'Interships'
+        verbose_name = 'Стажировка'
+        verbose_name_plural = 'Стажировки'
+
+
+class Specialization(models.Model):
+    specialization_name = models.TextField('specialization_name')
+
+    class Meta:
+        verbose_name = 'Специализация'
+        verbose_name_plural = 'Специализации'
+
+class InternshipSpecialization(models.Model):
+    specialization = models.ForeignKey(Specialization, on_delete=models.DO_NOTHING,  default='')
+    company_address = models.ForeignKey(CompanyAddress, on_delete=models.DO_NOTHING, default='')
+
+    class Meta:
+        verbose_name = 'Специализация у стажировки'
+        verbose_name_plural = 'Специализации стажировок'
+
 
 
