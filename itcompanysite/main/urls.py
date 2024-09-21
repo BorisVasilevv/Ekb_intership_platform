@@ -9,7 +9,7 @@ urlpatterns = [
     path('companies/', include('companies.urls')),
     path('map/', views.map, name='map'),
     path('accounts/', include('accounts.urls')),
-    path('internship/', include('internships.urls'))
+    path('internship/', include('internships.urls')),
 ]
 
 if settings.DEBUG:

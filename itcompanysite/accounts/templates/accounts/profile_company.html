@@ -37,9 +37,9 @@
     <div class="profile_section practies">
         <span class="section_title">Практики</span>
         <div class="section_items practies_items"></div>
-        <button class="add-item add-practies">
-            <span>+ Добавить практику</span>
-        </button>
+        <a href="{% url 'create_internship' %}">
+            <button class="add-item">Добавить практику</button>
+        </a>
     </div>
 
     <div class="profile_section requests">
@@ -47,12 +47,14 @@
         <div class="section_items requests_items">
             <div class="section_item request_item">
                 <span class="request_title"> Заявка 1 </span>
-                <button class="request_button accept-item">
+                <div class="request_buttons">
+                    <button class="request_button accept-item">
                     <span>Принять заявку</span>
                 </button>
                 <button class="request_button delete-item">
                     <span>Отклонить заявку</span>
                 </button>
+                </div>
             </div>
 
         </div>

@@ -1,6 +1,30 @@
-<h2>Создание стажировки</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Создать</button>
-</form>
+{% extends 'main/layout.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/creation.css' %}">
+{% endblock %}
+
+{% block title %}Создание стажировки{% endblock %}
+
+{% block content %}
+<main class="creation-container">
+    <div class="creation-header">
+        <span class="creation-header_main">Создание стажировки</span>
+    </div>
+
+    <form method="post" class="creation-form">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <!-- Удалил field.label_tag, т.к. render_field уже выводит и поле, и метку -->
+            {{ field|add_label_class:"creation-help-info" }}
+            {% render_field field class+="input-field" %}
+            {{ field.errors }}
+        {% endfor %}
+
+        <button class="submit-button" type="submit">Подтвердить</button>
+    </form>
+</main>
+{% endblock %}

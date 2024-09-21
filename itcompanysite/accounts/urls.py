@@ -15,7 +15,7 @@ urlpatterns = [
     path('profile/upload/', upload_document, name='upload_document'),
 
     path(
-        'i/',
+        'invalid_verify/',
         TemplateView.as_view(template_name='accounts/invalid_verify.html'),
         name='invalid_verify'
     ),
