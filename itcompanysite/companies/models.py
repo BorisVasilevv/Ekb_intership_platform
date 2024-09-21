@@ -74,8 +74,6 @@ class Company(models.Model):
     url = models.CharField('url', max_length=200)
     accreditation = models.BooleanField('accreditation')
     phone = models.CharField('phone', max_length=200, null=True, blank=True)
-    telegram = models.CharField('telegram', max_length=200, null=True, blank=True)
-    email = models.CharField('email', max_length=200, null=True, blank=True)
 
     def __str__(self):
         return self.name
