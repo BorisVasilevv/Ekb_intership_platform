@@ -177,7 +177,7 @@ class CompanyAddress(models.Model):
         verbose_name = 'CompanyAddress'
         verbose_name_plural = 'CompanyAddresses'
 
-class Intership(models.Model):
+class Internship(models.Model):
 
     all_places = models.IntegerField('all_places')
     available_places = models.IntegerField('available_places')
