@@ -2,6 +2,7 @@ from django.db import models
 from .namehelper import CompanyName
 from django.contrib.auth import get_user_model
 from .utils import geocoder
+from accounts.models import File
 
 
 User = get_user_model()
@@ -157,9 +158,6 @@ class CompanyAddress(models.Model):
         verbose_name = 'Адрес компании'
         verbose_name_plural = 'Адреса компаний'
 
-
-
-
 class Specialization(models.Model):
     specialization_name = models.TextField('specialization_name')
 
@@ -169,11 +167,13 @@ class Specialization(models.Model):
 
 class InternshipSpecialization(models.Model):
     specialization = models.ForeignKey(Specialization, on_delete=models.DO_NOTHING,  default='')
-    company_address = models.ForeignKey(CompanyAddress, on_delete=models.DO_NOTHING, default='')
+    company_address = models.ForeignKey(CompanyAddress, on_delete=models.DO_NOTHING, blank=True, null=True, default='')
 
     class Meta:
         verbose_name = 'Специализация у стажировки'
         verbose_name_plural = 'Специализации стажировок'
 
-
+class CompanyFiles(models.Model):
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, default='')
+    file = models.ForeignKey(File, on_delete=models.CASCADE(), default='')
 

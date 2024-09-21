@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 import django.utils.timezone
+from internships.models import Internship
 
 class User(AbstractUser):
     USERNAME_FIELD = "email"
@@ -45,18 +46,29 @@ class User(AbstractUser):
 
 class File(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,  default='')
-    document_text = models.FileField('document_text', upload_to='files/'+ str(uuid.uuid4())) #  TODO + user.id
+    document_text = models.FileField('document_text', upload_to='files/' + str(uuid.uuid4()))
     created_at = models.DateTimeField('created_at', default=django.utils.timezone.now)
-    document_name = models.TextField('document_name')
+    document_name = models.TextField('document_name', default='file' + str(uuid.uuid4()))
 
     class Meta:
         verbose_name = 'Резюме'
         verbose_name_plural = 'Резюме'
 
+class UserFiles(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default='')
+    file = models.ForeignKey(File, on_delete=models.CASCADE, default='')
 
 class StudentResponse(models.Model):
-    StudentResponseFiles = models.ForeignKey(User, on_delete=models.CASCADE,  default='')
-    internship = models.ForeignKey(Internship)
+    studentResponseFiles = models.ForeignKey(User, on_delete=models.CASCADE,  default='')
+    internship = models.ForeignKey(Internship, on_delete=models.DO_NOTHING,  default='')
+    response_text = models.TextField('response_text')
+    data_response = models.DateTimeField('data_response')
+
+
+class FavoriteInternship(models.Model):
+    internship = models.ForeignKey(Internship, on_delete=models.DO_NOTHING, default='')
+    models.ForeignKey(User, on_delete=models.CASCADE, default='')
+
 
 
 

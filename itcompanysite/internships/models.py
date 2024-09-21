@@ -14,3 +14,11 @@ class Internship(models.Model):
     company = models.ForeignKey(Company, on_delete=models.DO_NOTHING,  default='')
     company_address = models.ForeignKey(CompanyAddress, on_delete=models.DO_NOTHING, default='')
 
+
+class Specialization(models.Model):
+    specialization_name = models.TextField('specialization_name')
+
+class InternshipSpecialization(models.Model):
+    specialization = models.ForeignKey(Specialization, on_delete=models.SET_DEFAULT, default='')
+    internship = models.ForeignKey(Internship, on_delete=models.CASCADE, default='')
+
