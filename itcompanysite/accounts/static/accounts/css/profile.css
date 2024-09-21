@@ -52,6 +52,16 @@
 
 }
 
+.title{
+    text-align: center;
+    border-bottom: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    font-size: 24px;
+    letter-spacing: 0.2px;
+    padding: 20px;
+    max-width: 120px;
+}
+
 /*----------------*/
 
 
