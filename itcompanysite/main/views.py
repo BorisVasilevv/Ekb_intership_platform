@@ -17,13 +17,13 @@ def index(request):
 
     companies = Company.objects.all()
     # Достаём город пользователя по его геолокации
-    city = City.objects.get(id=1)
-    result_companies = companies_to_companies_with_address(companies)
+    # city = City.objects.get(id=1)
+    # result_companies = companies_to_companies_with_address(companies)
 
     context = {
         "categories": categories_with_subcategories,
-        "city": city,
-        "companies_with_address": result_companies
+        # "city": city,
+        "companies_with_address": companies
     }
     return render(request, 'main/index.html', context=context)
 
@@ -31,15 +31,15 @@ def map(request):
     subcategories = Subcategory.objects.all()
     companies = Company.objects.all()
     # Достаём город пользователя по его геолокации
-    city = City.objects.get(id=1)
-    result_companies = companies_to_companies_with_address(companies)
+    # city = City.objects.get(id=1)
+    # result_companies = companies_to_companies_with_address(companies)
 
-    context = {
-        "subcategories": subcategories,
-        "city": city,
-        "companies_with_address": result_companies
-    }
-    return render(request, 'main/map.html', context=context)
+    # context = {
+    #     "subcategories": subcategories,
+    #     "city": city,
+    #     "companies_with_address": result_companies
+    # }
+    # return render(request, 'main/map.html', context=context)
 
 def companies_to_companies_with_address(companies):
     result_companies = []
