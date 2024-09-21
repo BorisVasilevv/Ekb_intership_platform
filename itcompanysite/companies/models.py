@@ -4,9 +4,7 @@ from django.contrib.auth import get_user_model
 from .utils import geocoder
 from accounts.models import File
 
-
 User = get_user_model()
-
 
 class Category(models.Model):
     CATEGORY_NAME = (

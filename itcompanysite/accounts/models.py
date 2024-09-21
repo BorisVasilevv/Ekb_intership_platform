@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 import django.utils.timezone
-from internships.models import Internship
+
 
 class User(AbstractUser):
     USERNAME_FIELD = "email"
@@ -58,16 +58,7 @@ class UserFiles(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default='')
     file = models.ForeignKey(File, on_delete=models.CASCADE, default='')
 
-class StudentResponse(models.Model):
-    studentResponseFiles = models.ForeignKey(User, on_delete=models.CASCADE,  default='')
-    internship = models.ForeignKey(Internship, on_delete=models.DO_NOTHING,  default='')
-    response_text = models.TextField('response_text')
-    data_response = models.DateTimeField('data_response')
 
-
-class FavoriteInternship(models.Model):
-    internship = models.ForeignKey(Internship, on_delete=models.DO_NOTHING, default='')
-    models.ForeignKey(User, on_delete=models.CASCADE, default='')
 
 
 
