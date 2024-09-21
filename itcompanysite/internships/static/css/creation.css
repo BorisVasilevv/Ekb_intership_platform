@@ -1,0 +1,73 @@
+.registration-container{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.registration-header{
+    display: flex;
+    flex-direction: row;
+}
+
+.registration_user-type-header{
+    display: flex;
+    flex-direction: row;
+}
+
+.registration-header_main{
+    align-self: center;
+    background: transparent;
+    color: #faf446;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 35px;
+    padding: 0 15px;
+    cursor: default;
+}
+
+.registration-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 40px 0 20px 0;
+    width: 420px;
+}
+
+.input-field{
+    background-color: #302D2D;
+    border: 0;
+    border-radius: 5px;
+    color: #ffffff;
+    height: 30px;
+    margin-bottom: 20px;
+    letter-spacing: 0.2px;
+}
+
+.registration-help-info{
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0.2px;
+}
+
+
+.submit-button{
+    background: transparent;
+    border: 1px solid #FFFFFF;
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-size: 20px;
+    line-height: 21px;
+    padding: 15px ;
+    width: 420px;
+    cursor: pointer;
+    letter-spacing: 0.2px;
+}
+
+.submit-button:hover{
+    border-color: #faf446;
+    color: #faf446;
+}

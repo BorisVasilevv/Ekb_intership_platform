@@ -1,6 +1,30 @@
-<h2>Создание стажировки</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Создать</button>
-</form>
+{% extends 'main/layout.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/registration.css' %}">
+{% endblock %}
+{% block title %}Создание стажировки{% endblock %}
+
+{% block content %}
+<main class="registration-container">
+    <div class="registration-header">
+        <span class="registration-header_main">Создание стажировки</span>
+    </div>
+
+    <form method="post" class="registration-form">
+        {% csrf_token %}
+
+        {% for f in form.as_p %}
+            {% if f.name != 'role' %}  <!-- Исключаем поле role из отображения -->
+                {{ f|add_label_class:"registration-help-info" }}
+                {% render_field f class+="input-field" %}
+                {{ f.errors }}
+            {% endif %}
+        {% endfor %}
+
+        <button class="submit-button" type="submit">Подтвердить</button>
+    </form>
+</main>
+{% endblock %}
