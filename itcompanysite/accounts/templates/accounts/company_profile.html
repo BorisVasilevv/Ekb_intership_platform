@@ -1,0 +1,46 @@
+{%extends 'main/layout.html'%}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block head %}
+    <link rel="shortcut icon" href="{% static 'main/icons/user.svg'%}" />
+    <link rel="stylesheet" type="text/css" href="{%static 'accounts/css/profile.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'companies/css/companies.css'%}">
+{% endblock %}
+{% block title %}Мой профиль{%endblock%}
+
+{% block content %}
+
+<main class="profile-container">
+
+    <div class="profile-header">
+
+
+        <div class="profile-header__userName">
+            <img class="profile-header__icon" src="{% static 'accounts/icons/user.svg'%}">
+            <span class="userName-text">{{user.username}}</span>
+<!--            <a class="userName-reduction">-->
+<!--                <span>редактировать</span>-->
+<!--                <img class="userName-reduction__icon" src="{% static 'accounts/icons/arrow-right.svg'%}">-->
+<!--            </a>-->
+        </div>
+        <form class="profile-logout" action="{%url 'logout'%}">
+            <button class="profile-logout__button button" type="submit">
+                <img class="profile-logout_icon" src="{% static 'accounts/icons/logout.svg'%}">
+                <span>Выйти</span>
+            </button>
+        </form>
+    </div>
+
+    <div class="profile-header__rect"></div>
+
+
+    <div class="profile__favourite requests">
+
+    <div class="profile_info"></div>
+
+
+
+</main>
+
+{%endblock%}
