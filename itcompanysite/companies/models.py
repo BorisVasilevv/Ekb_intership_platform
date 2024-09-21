@@ -170,7 +170,7 @@ class InternshipSpecialization(models.Model):
 
 class CompanyFiles(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, default='')
-    file = models.ForeignKey(File, on_delete=models.CASCADE(), default='')
+    file = models.ForeignKey(File, on_delete=models.CASCADE, default='')
 
 class CompanyUser(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
