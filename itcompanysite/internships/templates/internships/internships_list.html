@@ -1,11 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'main/layout.html' %}
+{% load static %}
 
+{% block title %}Список стажировок{% endblock %}
 
-</body>
-</html>
+{% block content %}
+<main class="internships-list-container">
+    <h1>Доступные стажировки</h1>
+
+    <div class="internships-grid">
+        {% for internship in internships %}
+            <div class="internship-card">
+                <h2>{{ internship.company.name }}</h2>
+                <p><strong>Описание:</strong> {{ internship.description }}</p>
+                <p><strong>Тип работы:</strong> {{ internship.time_type_work }}</p>
+                <p><strong>Дата начала:</strong> {{ internship.date_start }}</p>
+                <p><strong>Дата окончания:</strong> {{ internship.date_end }}</p>
+                <p><strong>Адрес:</strong> {{ internship.company_address.address }}</p>
+                <p><strong>Зарплата:</strong> {{ internship.salary }} ₽</p>
+                <p><strong>Всего мест:</strong> {{ internship.all_places }} / <strong>Доступных:</strong> {{ internship.available_places }}</p>
+
+                <a href="{% url 'internship_detail' internship.id %}" class="details-button">Подробнее</a>
+            </div>
+        {% endfor %}
+    </div>
+</main>
+
+<style>
+    .internships-list-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .internships-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .internship-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .internship-card h2 {
+        margin-top: 0;
+        font-size: 24px;
+        color: #333;
+    }
+
+    .internship-card p {
+        margin: 8px 0;
+        font-size: 16px;
+        color: #555;
+    }
+
+    .details-button {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .details-button:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% endblock %}

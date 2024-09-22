@@ -1,0 +1,92 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block title %}{{ internship.company.name }} - Стажировка{% endblock %}
+
+{% block content %}
+<main class="internship-detail-container">
+    <div class="internship-header">
+        <h1>Стажировка в {{ internship.company.name }}</h1>
+        <p><strong>Адрес:</strong> {{ internship.company_address.address }}</p>
+    </div>
+
+    <div class="internship-details">
+        <h2>Детали стажировки</h2>
+
+        <p><strong>Описание:</strong> {{ internship.description }}</p>
+
+        <p><strong>Тип работы:</strong> {{ internship.time_type_work }}</p>
+
+        <p><strong>Период стажировки:</strong> {{ internship.date_start }} - {{ internship.date_end }}</p>
+
+        <p><strong>Зарплата:</strong> {{ internship.salary }} ₽</p>
+
+        <p><strong>Всего мест:</strong> {{ internship.all_places }}</p>
+
+        <p><strong>Доступных мест:</strong> {{ internship.available_places }}</p>
+    </div>
+
+    <div class="internship-actions">
+        <a href="#" class="apply-button">Подать заявку</a>
+    </div>
+</main>
+
+<style>
+    .internship-detail-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .internship-header {
+        background-color: #f5f5f5;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .internship-header h1 {
+        margin: 0;
+        font-size: 32px;
+        color: #333;
+    }
+
+    .internship-header p {
+        margin: 5px 0 0;
+        font-size: 18px;
+        color: #555;
+    }
+
+    .internship-details h2 {
+        margin-bottom: 10px;
+        font-size: 24px;
+        color: #333;
+    }
+
+    .internship-details p {
+        margin: 8px 0;
+        font-size: 16px;
+        color: #555;
+    }
+
+    .internship-actions {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .apply-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .apply-button:hover {
+        background-color: #218838;
+    }
+</style>
+{% endblock %}
