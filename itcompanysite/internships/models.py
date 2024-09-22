@@ -38,7 +38,6 @@ class StudentResponseFile(models.Model):
     file = models.ForeignKey(File, on_delete=models.CASCADE)
 
 
-
 class FavoriteInternship(models.Model):
     internship = models.ForeignKey(Internship, on_delete=models.DO_NOTHING, default='')
     models.ForeignKey(User, on_delete=models.CASCADE, default='')
