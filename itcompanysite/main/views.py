@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import UserRegistrationForm, NewsForm
 from companies.models import Category, Subcategory, Company, City, Address, CompanyAddress, CompanyCategory, City
+from internships.models import Internship
 from .helpstructure import CategoryWithSubcategories, CompanyWithAddress
 from .models import News
 
@@ -72,3 +73,8 @@ def companies_to_companies_with_address(companies):
 
             result_companies.append(company_with_address)
     return result_companies
+
+
+def internship(request):
+    internships = Internship.objects.all()
+    return render(request, 'internships/internships_list.html', context={'internships': internships})
