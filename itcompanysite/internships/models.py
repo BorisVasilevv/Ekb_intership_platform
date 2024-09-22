@@ -1,5 +1,6 @@
 from django.db import models
 from companies.models import Company, CompanyAddress
+from accounts.models import File
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -26,10 +27,16 @@ class InternshipSpecialization(models.Model):
     internship = models.ForeignKey(Internship, on_delete=models.CASCADE, default='')
 
 class StudentResponse(models.Model):
-    studentResponseFiles = models.ForeignKey(User, on_delete=models.CASCADE,  default='')
-    internship = models.ForeignKey(Internship, on_delete=models.DO_NOTHING,  default='')
-    response_text = models.TextField('response_text')
-    data_response = models.DateTimeField('data_response')
+    student = models.ForeignKey(User, on_delete=models.CASCADE, default='')
+    internship = models.ForeignKey(Internship, on_delete=models.DO_NOTHING, default='')
+    response_text = models.TextField('Текст отклика', blank=True)
+    data_response = models.DateTimeField('Дата отклика', auto_now_add=True)
+
+
+class StudentResponseFile(models.Model):
+    response = models.ForeignKey(StudentResponse, on_delete=models.CASCADE)
+    file = models.ForeignKey(File, on_delete=models.CASCADE)
+
 
 
 class FavoriteInternship(models.Model):

@@ -1,32 +1,27 @@
-{%extends 'main/layout.html'%}
+{% extends 'main/layout.html' %}
 {% load static %}
 {% load widget_tweaks %}
 
 {% block head %}
-    <link rel="shortcut icon" href="{% static 'main/icons/user.svg'%}" />
-    <link rel="stylesheet" type="text/css" href="{%static 'accounts/css/profile.css'%}">
-    <link rel="stylesheet" type="text/css" href="{% static 'companies/css/companies.css'%}">
+    <link rel="shortcut icon" href="{% static 'main/icons/user.svg' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/profile.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'companies/css/companies.css' %}">
 {% endblock %}
-{% block title %}Мой профиль{%endblock%}
+
+{% block title %}Мой профиль{% endblock %}
 
 {% block content %}
 
 <main class="profile-container">
 
     <div class="profile-header">
-
-
         <div class="profile-header__userName">
-            <img class="profile-header__icon" src="{% static 'accounts/icons/user.svg'%}">
-            <span class="userName-text">{{user.username}}</span>
-<!--            <a class="userName-reduction">-->
-<!--                <span>редактировать</span>-->
-<!--                <img class="userName-reduction__icon" src="{% static 'accounts/icons/arrow-right.svg'%}">-->
-<!--            </a>-->
+            <img class="profile-header__icon" src="{% static 'accounts/icons/user.svg' %}">
+            <span class="userName-text">{{ user.username }}</span>
         </div>
-        <form class="profile-logout" action="{%url 'logout'%}">
+        <form class="profile-logout" action="{% url 'logout' %}">
             <button class="profile-logout__button button" type="submit">
-                <img class="profile-logout_icon" src="{% static 'accounts/icons/logout.svg'%}">
+                <img class="profile-logout_icon" src="{% static 'accounts/icons/logout.svg' %}">
                 <span>Выйти</span>
             </button>
         </form>
@@ -45,26 +40,43 @@
     <div class="profile_section requests">
         <span class="section_title">Заявки</span>
         <div class="section_items requests_items">
-            <div class="section_item request_item">
-                <span class="request_title"> Заявка 1 </span>
-                <div class="request_buttons">
-                    <button class="request_button accept-item">
-                    <span>Принять заявку</span>
-                </button>
-                <button class="request_button delete-item">
-                    <span>Отклонить заявку</span>
-                </button>
+            {% for response in responses %}
+                <div class="section_item request_item">
+                    <span class="request_title">
+                        Отклик на стажировку в {{ response.internship.company.name }}
+                    </span>
+                    <p><strong>Дата отклика:</strong> {{ response.data_response }}</p>
+                    <p><strong>Сообщение:</strong> {{ response.response_text }}</p>
+                    <p><strong>Файлы:</strong>
+                        {% if response.studentresponsefile_set.exists %}
+                            <ul>
+                                {% for file in response.studentresponsefile_set.all %}
+                                    <li>
+                                        <a href="{{ file.file.document_text.url }}">{{ file.file.document_name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <span>Файлы не прикреплены</span>
+                        {% endif %}
+                    </p>
+                    <div class="request_buttons">
+                        <button class="request_button accept-item">
+                            <span>Принять заявку</span>
+                        </button>
+                        <button class="request_button delete-item">
+                            <span>Отклонить заявку</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
-
+            {% empty %}
+                <p>У вас нет откликов на стажировки.</p>
+            {% endfor %}
         </div>
-
     </div>
-
 
     <div class="profile_info"></div>
 
-
 </main>
 
-{%endblock%}
+{% endblock %}

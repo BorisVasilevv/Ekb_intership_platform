@@ -5,10 +5,13 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from .utils import send_email_for_verify
 from companies.models import Company, City, Address, CompanyAddress, CompanyUser
-
+from internships.models import StudentResponse
+from .models import File
 from companies.utils import geocoder
 
 User = get_user_model()
+
+
 class StudentCreationForm(UserCreationForm):
 
     """Method which let username be not unique"""
@@ -134,4 +137,18 @@ class MyAuthenticationForm(AuthenticationForm):
             else:
                 self.confirm_login_allowed(self.user_cache)
         return self.cleaned_data
+
+
+class StudentResponseForm(forms.ModelForm):
+    files = forms.ModelMultipleChoiceField(
+        queryset=File.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
+        label="Выберите файлы"
+    )
+    response_text = forms.CharField(widget=forms.Textarea, label="Текст отклика", required=False)
+
+    class Meta:
+        model = StudentResponse
+        fields = ['response_text', 'files']
 
