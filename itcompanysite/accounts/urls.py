@@ -2,6 +2,7 @@ from django.views.generic import TemplateView
 from . import views
 from django.urls import path, include
 from .views import EmailView, MyLoginView, upload_document
+from internships.views import create_internship
 
 urlpatterns = [
     path("login/", MyLoginView.as_view(), name="login"),
@@ -35,4 +36,5 @@ urlpatterns = [
         name="verify_email",
     ),
     path('remove_from_favorites/<int:company_id>/', views.remove_from_favorites, name='remove_from_favorites'),
+    path('create_internship/', create_internship, name='create_internship')
 ]

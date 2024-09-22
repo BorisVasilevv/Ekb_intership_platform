@@ -13,13 +13,13 @@ def get_object_or_404(model, **kwargs):
         raise Http404(f"{model._meta.verbose_name} не найден.")
 
 
-@login_required
 def create_internship(request):
     if request.method == 'POST':
         form = InternshipCreationForm(request.POST)
         if form.is_valid():
             internship = form.save()
-            return redirect('internships_list')
+            internships = Internship.objects.all()
+            return render(request, 'internships/internships_list.html', {'internships': internships})
     else:
         form = InternshipCreationForm()
 
