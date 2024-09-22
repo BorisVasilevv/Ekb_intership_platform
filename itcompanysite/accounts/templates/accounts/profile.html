@@ -44,11 +44,28 @@
         </button>
         <input type="file" id="fileInput" style="display: none;" /> <!-- Скрытое поле для загрузки -->
 
+{#        <div class="profile_documents">#}
+{#            {% for file in files%}#}
+{#                <span class="document_name"> {{ file.document_name }} </span>#}
+{#            {%endfor%}#}
+{#        </div>#}
         <div class="profile_documents">
-            {% for file in files%}
+        {% for file in files %}
+            <div class="document_item">
+{#                <form method="post" action="{% url 'download_document' file.id %}" style="display:inline;">#}
+{#                    {% csrf_token %}#}
+{#                    <button type="submit" class="download_button">Скачать</button>#}
+{#                </form>#}
+                <button type="submit" class="button_doc download_button">Скачать</button>
                 <span class="document_name"> {{ file.document_name }} </span>
-            {%endfor%}
-        </div>
+{#                <form method="post" action="{% url 'delete_document' file.id %}" style="display:inline;">#}
+{#                    {% csrf_token %}#}
+{#                    <button type="submit" class="delete_button">Удалить</button>#}
+{#                </form>#}
+                <button type="submit" class="button_doc delete_button">Удалить</button>
+            </div>
+        {% endfor %}
+</div>
 
     </div>
 
