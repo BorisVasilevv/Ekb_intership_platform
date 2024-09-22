@@ -3,8 +3,9 @@ from companies.models import Company, CompanyAddress
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
-class Internship(models.Model):
 
+
+class Internship(models.Model):
     all_places = models.IntegerField('Всего мест')
     available_places = models.IntegerField('Доступных мест')
     time_type_work = models.TextField('Тип рабочего времени')
@@ -14,6 +15,7 @@ class Internship(models.Model):
     description = models.TextField('Описание', default="")
     company = models.ForeignKey(Company, on_delete=models.DO_NOTHING, default='', verbose_name='Компания')
     company_address = models.ForeignKey(CompanyAddress, on_delete=models.DO_NOTHING, default='', verbose_name='Адрес компании')
+
 
 
 class Specialization(models.Model):
