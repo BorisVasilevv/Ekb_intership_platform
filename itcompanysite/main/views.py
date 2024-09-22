@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import UserRegistrationForm, NewsForm
 from companies.models import Category, Subcategory, Company, City, Address, CompanyAddress, CompanyCategory, City
+from internships.models import Internship
 from .helpstructure import CategoryWithSubcategories, CompanyWithAddress
 from .models import News
 
@@ -72,3 +73,23 @@ def companies_to_companies_with_address(companies):
 
             result_companies.append(company_with_address)
     return result_companies
+
+
+def internship(request):
+    internships = Internship.objects.all()
+
+    return render(request, 'internships/internships_list.html', context={'internships': internships})
+
+
+def get_object_or_404(model, **kwargs):
+    try:
+        return model.objects.get(**kwargs)
+    except model.DoesNotExist:
+        raise Http404(f"{model._meta.verbose_name} не найден.")
+
+def internship_detail(request, internship_id):
+    # Получаем стажировку или возвращаем 404, если не найдена
+    internship = get_object_or_404(Internship, pk=internship_id)
+
+    # Рендерим шаблон с деталями стажировки
+    return render(request, 'internships/internship_detail.html', {'internship': internship})
