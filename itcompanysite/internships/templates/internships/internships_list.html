@@ -11,13 +11,13 @@
         {% for internship in internships %}
             <div class="internship-card">
                 <h2>{{ internship.company.name }}</h2>
-                <p><strong>Описание:</strong> {{ internship.description }}</p>
-                <p><strong>Тип работы:</strong> {{ internship.time_type_work }}</p>
-                <p><strong>Дата начала:</strong> {{ internship.date_start }}</p>
-                <p><strong>Дата окончания:</strong> {{ internship.date_end }}</p>
-                <p><strong>Адрес:</strong> {{ internship.company_address.address }}</p>
-                <p><strong>Зарплата:</strong> {{ internship.salary }} ₽</p>
-                <p><strong>Всего мест:</strong> {{ internship.all_places }} / <strong>Доступных:</strong> {{ internship.available_places }}</p>
+                <p class="card_item"><strong>Описание:</strong> {{ internship.description }}</p>
+                <p class="card_item"><strong>Тип работы:</strong> {{ internship.time_type_work }}</p>
+                <p class="card_item"><strong>Дата начала:</strong> {{ internship.date_start }}</p>
+                <p class="card_item"><strong>Дата окончания:</strong> {{ internship.date_end }}</p>
+                <p class="card_item"><strong>Адрес:</strong> {{ internship.company_address.address }}</p>
+                <p class="card_item"><strong>Зарплата:</strong> {{ internship.salary }} ₽</p>
+                <p class="card_item"><strong>Всего мест:</strong> {{ internship.all_places }} / <strong>Доступных:</strong> {{ internship.available_places }}</p>
 
                 <a href="{% url 'internship_detail' internship.id %}" class="details-button">Подробнее</a>
             </div>
@@ -39,30 +39,45 @@
     }
 
     .internship-card {
-        border: 1px solid #ddd;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        border: 1px solid #faf446;
         border-radius: 8px;
         padding: 20px;
-        background-color: #f9f9f9;
+        background-color: ;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin: 30px
+    }
+
+    strong{
+        border-bottom: 0.5px solid #FFFFFF;
+    }
+
+    .card_item{
+        color: #FFFFFF;
     }
 
     .internship-card h2 {
+        border-bottom: 1px solid #faf446;
         margin-top: 0;
-        font-size: 24px;
-        color: #333;
+        font-size: 30px;
+        padding-bottom: 5px;
+
     }
 
     .internship-card p {
         margin: 8px 0;
         font-size: 16px;
-        color: #555;
     }
 
     .details-button {
         display: inline-block;
+        border: 1px solid #FFFFFF;
         margin-top: 10px;
         padding: 10px 15px;
-        background-color: #007bff;
+        background-color: transparent;
         color: #fff;
         text-decoration: none;
         border-radius: 5px;
