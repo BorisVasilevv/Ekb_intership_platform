@@ -95,7 +95,7 @@ def profile(request):
     else:
         raise Http404("User type not recognized")
 
-
+#
 class EmailView(View):
     def get(self, request, uidb64, token):
         user = self.get_user(uidb64)
