@@ -75,7 +75,7 @@ def search(request):
         'result_companies': result_companies,
         'query': query,
     }
-    return render(request, 'companies/companies.html', context)
+    return render(request, 'companies/vacancies.html', context)
 
 
 
