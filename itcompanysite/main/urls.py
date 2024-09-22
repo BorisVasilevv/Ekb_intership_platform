@@ -10,6 +10,7 @@ urlpatterns = [
     path('map/', views.map, name='map'),
     path('accounts/', include('accounts.urls')),
     path('internship/', views.internship, name='internship'),
+    path('<int:internship_id>/', views.internship_detail, name='internship_detail')
 ]
 
 if settings.DEBUG:

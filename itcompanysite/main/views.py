@@ -77,4 +77,19 @@ def companies_to_companies_with_address(companies):
 
 def internship(request):
     internships = Internship.objects.all()
+
     return render(request, 'internships/internships_list.html', context={'internships': internships})
+
+
+def get_object_or_404(model, **kwargs):
+    try:
+        return model.objects.get(**kwargs)
+    except model.DoesNotExist:
+        raise Http404(f"{model._meta.verbose_name} не найден.")
+
+def internship_detail(request, internship_id):
+    # Получаем стажировку или возвращаем 404, если не найдена
+    internship = get_object_or_404(Internship, pk=internship_id)
+
+    # Рендерим шаблон с деталями стажировки
+    return render(request, 'internships/internship_detail.html', {'internship': internship})
