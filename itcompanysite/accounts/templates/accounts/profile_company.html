@@ -6,6 +6,26 @@
     <link rel="shortcut icon" href="{% static 'main/icons/user.svg' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/profile.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'companies/css/companies.css' %}">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const requestItems = document.querySelectorAll('.request_item');
+
+            requestItems.forEach(item => {
+                const acceptButton = item.querySelector('.accept-item');
+                const deleteButton = item.querySelector('.delete-item');
+
+                acceptButton.addEventListener('click', function() {
+                    item.style.display = 'none'; // Скрыть заявку
+                    // Здесь можно добавить AJAX-запрос для обновления состояния на сервере
+                });
+
+                deleteButton.addEventListener('click', function() {
+                    item.style.display = 'none'; // Скрыть заявку
+                    // Здесь можно добавить AJAX-запрос для обновления состояния на сервере
+                });
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block title %}Мой профиль{% endblock %}
