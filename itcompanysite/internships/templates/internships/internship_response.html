@@ -1,0 +1,15 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Отклик на стажировку{% endblock %}
+
+{% block content %}
+<main class="response-form-container">
+    <h1>Отклик на стажировку в {{ internship.company.name }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="apply-button">Отправить отклик</button>
+    </form>
+</main>
+{% endblock %}

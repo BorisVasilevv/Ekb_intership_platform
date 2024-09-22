@@ -17,6 +17,8 @@ from .helpstructure import CompanyWithCategoryData
 from django.http import Http404
 from django.views.decorators.csrf import csrf_exempt
 import django.utils.timezone
+from internships.models import Internship, StudentResponse, StudentResponseFile
+from .forms import StudentResponseForm
 
 User = get_user_model()
 
@@ -51,10 +53,12 @@ def registration(request):
 
 def profile(request):
     user = request.user
+
+    # Получение избранных компаний
     favorite_entries = Favorite.objects.filter(user_id=user.id)
     companies_for_user = [entry.company for entry in favorite_entries]
     result_companies = []
-    
+
     for comp in companies_for_user:
         company_categories = CompanyCategory.objects.filter(company_id=comp.id)
         subcategories_by_comp = [company_categoty.subcategory for company_categoty in company_categories]
@@ -63,12 +67,23 @@ def profile(request):
                                                         comp.url, categories_by_comp, subcategories_by_comp,
                                                         comp.phone, comp.telegram, comp.accreditation, comp.email))
 
+    # Получение файлов пользователя
     user_files = UserFiles.objects.filter(user_id=user.id)
     files = [user_file.file for user_file in user_files]
+
+    # Получение откликов пользователя на стажировки (для компаний)
+    if user.is_company():
+        responses = StudentResponse.objects.filter(internship_id=user.id)
+    else:
+        responses = StudentResponse.objects.filter(student=user)
+
     context = {
         'companies': result_companies,
-        'files': files
+        'files': files,
+        'responses': responses,  # Добавляем отклики в контекст
     }
+
+    # Логика для разных типов пользователей
     if user.is_student():
         return render(request, 'accounts/profile.html', context)
     elif user.is_admin():
@@ -145,6 +160,7 @@ def upload_document(request):
             return JsonResponse({'errors': 'Файл или имя документа не переданы'}, status=400)
 
     return JsonResponse({'message': 'Метод не разрешён'}, status=405)
+
 
 class MyLoginView(LoginView):
     template_name = "accounts/login.html"
