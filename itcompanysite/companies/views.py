@@ -54,7 +54,7 @@ def companies_per_category_subcategory(request, category_or_subcategory_name):
         'category_or_subcategory': category_or_subcategory,
         'result_companies': result_companies,
     }
-    return render(request, 'companies/vacancies.html', context)
+    return render(request, 'companies/companies.html', context)
 
 
 def search(request):
