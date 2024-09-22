@@ -8,10 +8,7 @@ class CompanyFullData:
     short_description: str
     url: str
     is_favorite: bool
-    accreditation: bool
     phone: str
-    telegram: str
-    email: str
     categories: []
     subcategories: []
 
@@ -22,9 +19,6 @@ class CompanyFullData:
         self.short_description = company.short_description
         self.url = company.url
         self.phone = company.phone
-        self.telegram = company.telegram
-        self.accreditation = company.accreditation
-        self.email = company.email
         self.is_favorite = company_is_favorite
         self.categories = categories
         self.subcategories = subcategories

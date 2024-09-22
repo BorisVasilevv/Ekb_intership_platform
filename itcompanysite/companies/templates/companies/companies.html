@@ -70,7 +70,9 @@
 
             <div class="company-item_main">
                 <a class="companies-item_link" href="{{company.url}}">
-                    <img class="companies-item_link-img" src="{{ company.logotype.url }}">
+                    {% if company.logotype.url is not none %}
+                        <img class="companies-item_link-img" src="{{ company.logotype.url }}">
+                    {% endif %}
                 </a>
                 <div class="companies-item_description">
                   <!--  <div class="companies-item-tags">
@@ -89,16 +91,10 @@
                 </div>
             </div>
 
-            {% if company.phone is not none or company.telegram is not none or company.email is not none %}
+            {% if company.phone is not none  %}
                 <div class="contacts-container">
                     <span class="contacts-title">Способы связи с компанией для стажировки:</span>
                     <div class="contacts-content">
-                        {% if company.telegram is not none%}
-                            <div class="contact-item">
-                                <img class="contact-item__icon" src="{% static 'companies/icons/telegram.svg'%}">
-                                <span class="contact-item__link">{{company.telegram}}</span>
-                            </div>
-                        {% endif %}
 
                         {% if company.phone is not none%}
                             <div class="contact-item">
@@ -107,12 +103,6 @@
                             </div>
                         {% endif %}
 
-                        {% if company.email is not none%}
-                            <div class="contact-item">
-                                <img class="contact-item__icon" src="{% static 'companies/icons/email.svg'%}">
-                                <span class="contact-item__link">{{company.email}}</span>
-                            </div>
-                        {% endif %}
                     </div>
                 </div>
             {% endif %}
