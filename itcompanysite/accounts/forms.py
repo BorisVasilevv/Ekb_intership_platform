@@ -103,11 +103,14 @@ class CompanyCreationForm(UserCreationForm):
             house_number = location_data[2] if len(location_data) > 2 else ""
 
             coordinates = geocoder(city_name)
+            coordinates2 = geocoder(location_data)
             city, _ = City.objects.get_or_create(name=city_name, coordinate_x=coordinates[0], coordinate_y=coordinates[1])
             address = Address.objects.create(
                 city=city,
                 street=street_name,
-                home_number=house_number
+                home_number=house_number,
+                coordinate_x=coordinates2[0],
+                coordinate_y=coordinates2[1],
             )
 
             # Связываем компанию с адресом
@@ -116,7 +119,6 @@ class CompanyCreationForm(UserCreationForm):
             # Опционально связываем компанию с пользователем
             CompanyUser.objects.create(user=user, company=company)
         return user
-
 class MyAuthenticationForm(AuthenticationForm):
     def clean(self):
         username = self.cleaned_data.get("username")
